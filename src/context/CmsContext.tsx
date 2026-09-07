@@ -33,6 +33,7 @@ interface CmsContextType {
   addBlogPost: (post: BlogPost) => void;
   deleteBlogPost: (postId: string) => void;
   addInquiry: (inquiry: Omit<ContactInquiry, 'id' | 'timestamp' | 'status'>) => ContactInquiry;
+  deleteInquiry: (inquiryId: string) => void;
   exportCmsData: () => void;
   importCmsData: (jsonString: string) => boolean;
   resetToDefaults: () => void;
@@ -40,7 +41,7 @@ interface CmsContextType {
 
 const CmsContext = createContext<CmsContextType | undefined>(undefined);
 
-const LOCAL_STORAGE_KEY = 'ferro_global_cms_content_v1';
+const LOCAL_STORAGE_KEY = 'ferro_global_cms_content_v10';
 const INQUIRIES_STORAGE_KEY = 'ferro_global_inquiries_v1';
 const LOGO_STORAGE_KEY = 'ferro_global_logo_url_v1';
 
@@ -195,9 +196,13 @@ export const CmsProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     return newInquiry;
   };
 
+  const deleteInquiry = (inquiryId: string) => {
+    setInquiries((prev) => prev.filter((inquiry) => inquiry.id !== inquiryId));
+  };
+
   const exportCmsData = () => {
     const exportObject = {
-      project: 'Ferro Global Trading LLC (ferroglobal.ae)',
+      project: 'Ferro Global Trading LLC',
       exportTimestamp: new Date().toISOString(),
       companyInfo,
       products,
@@ -261,6 +266,7 @@ export const CmsProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         addBlogPost,
         deleteBlogPost,
         addInquiry,
+        deleteInquiry,
         exportCmsData,
         importCmsData,
         resetToDefaults,

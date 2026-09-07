@@ -16,6 +16,9 @@ import {
   Inbox,
   CheckCircle,
   FileText,
+  Mail,
+  MessageCircle,
+  LockKeyhole,
 } from 'lucide-react';
 
 export const CmsAdminModal: React.FC = () => {
@@ -33,6 +36,7 @@ export const CmsAdminModal: React.FC = () => {
     addBlogPost,
     deleteBlogPost,
     inquiries,
+    deleteInquiry,
     exportCmsData,
     importCmsData,
     resetToDefaults,
@@ -44,8 +48,92 @@ export const CmsAdminModal: React.FC = () => {
   const [selectedProductId, setSelectedProductId] = useState<string>(products[0]?.id || '');
   const [selectedPostId, setSelectedPostId] = useState<string>(blogPosts[0]?.id || '');
   const [statusMessage, setStatusMessage] = useState<string | null>(null);
+  const [password, setPassword] = useState('');
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [loginError, setLoginError] = useState(false);
+  const cmsPassword = import.meta.env.VITE_CMS_PASSWORD;
 
   if (!isCmsAdminOpen) return null;
+
+  const handleLogin = (event: React.FormEvent) => {
+    event.preventDefault();
+    if (cmsPassword && password === cmsPassword) {
+      setIsAuthenticated(true);
+      setPassword('');
+      setLoginError(false);
+      return;
+    }
+    setLoginError(true);
+  };
+
+  const closeStudio = () => {
+    setIsAuthenticated(false);
+    setPassword('');
+    setLoginError(false);
+    setIsCmsAdminOpen(false);
+  };
+
+  if (!isAuthenticated) {
+    return (
+      <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-xs">
+        <div className="w-full max-w-md bg-white border border-gray-300 shadow-2xl text-left">
+          <div className="p-5 bg-[#1A1A1A] text-white flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <div className="p-2 bg-[#D32F2F]"><Database className="w-5 h-5" /></div>
+              <div>
+                <h2 className="font-heading text-lg font-bold uppercase tracking-tight">CMS Studio</h2>
+                <p className="text-xs text-gray-400">Private administration area</p>
+              </div>
+            </div>
+            <button
+              type="button"
+              onClick={closeStudio}
+              className="p-1.5 text-gray-400 hover:text-white"
+              aria-label="Close CMS login"
+            >
+              <X className="w-5 h-5" />
+            </button>
+          </div>
+          <form onSubmit={handleLogin} className="p-6 space-y-4">
+            <div>
+              <label htmlFor="cms-password" className="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-2">
+                Studio password
+              </label>
+              <input
+                id="cms-password"
+                type="password"
+                value={password}
+                onChange={(event) => {
+                  setPassword(event.target.value);
+                  setLoginError(false);
+                }}
+                autoFocus
+                required
+                className="w-full bg-[#F8F9FA] border border-gray-300 px-3 py-2.5 text-sm text-[#1A1A1A] focus:outline-none focus:border-[#D32F2F]"
+                placeholder="Enter password"
+              />
+            </div>
+            {loginError && (
+              <p className="text-xs font-semibold text-[#D32F2F]" role="alert">
+                Incorrect password. Access was not granted.
+              </p>
+            )}
+            {!cmsPassword && (
+              <p className="text-xs font-semibold text-[#D32F2F]" role="alert">
+                CMS password is not configured. Add VITE_CMS_PASSWORD to .env.local.
+              </p>
+            )}
+            <button
+              type="submit"
+              className="w-full py-3 bg-[#D32F2F] hover:bg-[#b71c1c] text-white text-xs font-bold uppercase tracking-wider"
+            >
+              Unlock CMS Studio
+            </button>
+          </form>
+        </div>
+      </div>
+    );
+  }
 
   const showNotification = (msg: string) => {
     setStatusMessage(msg);
@@ -137,7 +225,7 @@ export const CmsAdminModal: React.FC = () => {
                   Headless CMS Management Studio
                 </h3>
                 <span className="px-2 py-0.5 bg-black/50 text-[#D32F2F] border border-gray-800 text-[10px] font-mono font-bold">
-                  ferroglobal.ae CMS
+                  Private CMS
                 </span>
               </div>
               <p className="text-xs text-gray-400 font-normal">
@@ -146,12 +234,24 @@ export const CmsAdminModal: React.FC = () => {
             </div>
           </div>
 
-          <button
-            onClick={() => setIsCmsAdminOpen(false)}
-            className="p-1.5 text-gray-400 hover:text-white transition-colors cursor-pointer"
-          >
-            <X className="w-5 h-5" />
-          </button>
+          <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={closeStudio}
+              className="inline-flex items-center gap-1.5 px-2.5 py-1.5 border border-gray-700 text-[10px] font-bold uppercase tracking-wider text-gray-300 hover:text-white hover:border-gray-500"
+            >
+              <LockKeyhole className="w-3.5 h-3.5" />
+              <span>Lock Studio</span>
+            </button>
+            <button
+              type="button"
+              onClick={closeStudio}
+              className="p-1.5 text-gray-400 hover:text-white transition-colors cursor-pointer"
+              aria-label="Close CMS Studio"
+            >
+              <X className="w-5 h-5" />
+            </button>
+          </div>
         </div>
 
         {/* Tab Navigation */}
@@ -201,7 +301,7 @@ export const CmsAdminModal: React.FC = () => {
             }`}
           >
             <Inbox className="w-4 h-4" />
-            <span>RFQ Inquiries ({inquiries.length})</span>
+            <span>Enquiries ({inquiries.length})</span>
           </button>
 
           <button
@@ -242,15 +342,6 @@ export const CmsAdminModal: React.FC = () => {
                   />
                 </div>
 
-                <div>
-                  <label className="block text-gray-700 uppercase font-bold tracking-wider mb-1">Domain Name</label>
-                  <input
-                    type="text"
-                    value={companyInfo.domain}
-                    onChange={(e) => updateCompanyInfo({ ...companyInfo, domain: e.target.value })}
-                    className="w-full bg-[#F8F9FA] border border-gray-300 p-2.5 text-[#1A1A1A] font-mono focus:border-[#D32F2F] focus:bg-white"
-                  />
-                </div>
               </div>
 
               <div>
@@ -577,14 +668,14 @@ export const CmsAdminModal: React.FC = () => {
             <div className="space-y-4">
               <div className="flex items-center justify-between">
                 <span className="text-xs font-bold text-gray-700 uppercase tracking-wider">
-                  Logged Automated RFQ Submissions ({inquiries.length})
+                  Enquiry submissions ({inquiries.length})
                 </span>
                 <span className="text-[11px] text-gray-500 font-mono">Real-time pipeline</span>
               </div>
 
               {inquiries.length === 0 ? (
                 <div className="p-8 text-center text-xs text-gray-500 bg-[#F8F9FA] border border-gray-200">
-                  No RFQs submitted yet. Test the automated form on the home page.
+                  No enquiries submitted yet. New website enquiries will appear here.
                 </div>
               ) : (
                 <div className="space-y-3 max-h-96 overflow-y-auto">
@@ -615,6 +706,37 @@ export const CmsAdminModal: React.FC = () => {
                       </div>
                       <div className="text-[11px] text-gray-600 pt-1 border-t border-gray-200">
                         Email: <span className="font-medium text-gray-900">{inq.email}</span> | Phone: <span className="font-medium text-gray-900">{inq.phone}</span>
+                      </div>
+                      <div className="flex flex-wrap items-center gap-2 pt-2">
+                        <a
+                          href={`mailto:${inq.email}?subject=${encodeURIComponent(`Re: ${inq.productName} enquiry ${inq.id}`)}`}
+                          className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#1A1A1A] text-white hover:bg-black text-[11px] font-bold uppercase tracking-wider"
+                        >
+                          <Mail className="w-3.5 h-3.5" />
+                          <span>Reply by email</span>
+                        </a>
+                        <a
+                          href={`https://wa.me/${inq.phone.replace(/\D/g, '')}?text=${encodeURIComponent(`Hello ${inq.contactPerson}, following up on your ${inq.productName} enquiry ${inq.id}.`)}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-emerald-600 text-white hover:bg-emerald-700 text-[11px] font-bold uppercase tracking-wider"
+                        >
+                          <MessageCircle className="w-3.5 h-3.5" />
+                          <span>Reply on WhatsApp</span>
+                        </a>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            if (window.confirm(`Delete enquiry ${inq.id}?`)) {
+                              deleteInquiry(inq.id);
+                              showNotification('Enquiry deleted');
+                            }
+                          }}
+                          className="inline-flex items-center gap-1.5 px-3 py-1.5 text-[#D32F2F] hover:bg-red-50 border border-red-200 text-[11px] font-bold uppercase tracking-wider"
+                        >
+                          <Trash2 className="w-3.5 h-3.5" />
+                          <span>Delete</span>
+                        </button>
                       </div>
                     </div>
                   ))}
@@ -685,7 +807,7 @@ export const CmsAdminModal: React.FC = () => {
         <div className="p-3.5 bg-[#F8F9FA] border-t border-gray-200 text-xs text-gray-500 flex items-center justify-between">
           <span className="font-mono text-[11px]">Headless CMS Engine v1.0.0</span>
           <button
-            onClick={() => setIsCmsAdminOpen(false)}
+            onClick={closeStudio}
             className="px-5 py-1.5 bg-[#1A1A1A] hover:bg-black text-white font-bold uppercase tracking-wider text-xs cursor-pointer"
           >
             Exit Studio

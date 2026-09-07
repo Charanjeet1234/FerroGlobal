@@ -6,10 +6,7 @@ import {
   Phone,
   Mail,
   ArrowUp,
-  ShieldCheck,
-  Globe2,
   Database,
-  ExternalLink,
 } from 'lucide-react';
 
 export const Footer: React.FC = () => {
@@ -42,10 +39,10 @@ export const Footer: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6 text-left">
           <div className="space-y-1">
             <h3 className="font-heading text-xl sm:text-2xl font-bold text-white uppercase tracking-tight">
-              Ready to Secure Your Ferro Alloy Supply Contracts?
+              Looking for a dependable material source?
             </h3>
             <p className="text-xs text-gray-400 font-normal">
-              Direct physical delivery to GCC, European, Asian, and African ports backed by rigorous pre-shipment inspections.
+              Share your grade, quantity and destination with the Ferro Global trading desk.
             </p>
           </div>
           <div className="flex items-center gap-3">
@@ -53,13 +50,13 @@ export const Footer: React.FC = () => {
               onClick={() => scrollTo('contact-section')}
               className="px-6 py-3 bg-[#D32F2F] hover:bg-[#b71c1c] text-white font-bold text-xs uppercase tracking-wider transition-colors shadow-xs"
             >
-              Request Spot Quote
+              Request a quotation
             </button>
             <a
               href={`tel:${companyInfo.contact.phonePrimary.replace(/\s/g, '')}`}
               className="px-6 py-3 border border-gray-700 hover:border-gray-500 text-gray-200 hover:text-white font-bold text-xs uppercase tracking-wider transition-colors"
             >
-              Call Trading Desk
+              Call the office
             </a>
           </div>
         </div>
@@ -71,9 +68,9 @@ export const Footer: React.FC = () => {
           
           {/* Column 1: Brand & Identity */}
           <div className="lg:col-span-4 space-y-4">
-            <Logo variant="footer" showCustomSlotPrompt={false} />
+            <Logo variant="footer" />
             <p className="text-xs text-gray-400 leading-relaxed max-w-sm mt-3 font-normal">
-              <strong>Ferro Global Trading LLC</strong> (ferroglobal.ae) is a premier Dubai-based commodities house supplying high-purity ferro alloys, primary metals, and smelting ores to steelmakers globally.
+              <strong>Ferro Global Trading LLC</strong> is a Dubai-based trading company supplying ferro alloys and manganese ore to steelmakers, foundries and industrial buyers.
             </p>
             <div className="space-y-2 pt-2 text-xs">
               <div className="flex items-start gap-2.5">
@@ -97,10 +94,10 @@ export const Footer: React.FC = () => {
             </div>
           </div>
 
-          {/* Column 2: Bulk Ferro Alloys Catalog */}
+          {/* Column 2: Core Ferro Alloys */}
           <div className="lg:col-span-3 space-y-3">
             <h4 className="font-heading text-xs font-bold text-white uppercase tracking-[0.2em] border-b border-gray-800 pb-2">
-              Bulk Ferro Alloys
+              Core ferro alloys
             </h4>
             <ul className="space-y-2">
               {products
@@ -119,10 +116,10 @@ export const Footer: React.FC = () => {
             </ul>
           </div>
 
-          {/* Column 3: Secondary Metals & Minerals */}
+          {/* Column 3: Manganese Ore */}
           <div className="lg:col-span-3 space-y-3">
-            <h4 className="font-heading text-xs font-bold text-white uppercase tracking-[0.2em] border-b border-gray-800 pb-2">
-              Metals & Minerals
+              <h4 className="font-heading text-xs font-bold text-white uppercase tracking-[0.2em] border-b border-gray-800 pb-2">
+              Manganese Ore
             </h4>
             <ul className="space-y-2">
               {products
@@ -149,17 +146,17 @@ export const Footer: React.FC = () => {
             <ul className="space-y-2 text-xs">
               <li>
                 <button onClick={() => scrollTo('company-section')} className="text-gray-400 hover:text-white">
-                  SGS Inspection SLA
+                  Product specifications
                 </button>
               </li>
               <li>
                 <button onClick={() => scrollTo('news-section')} className="text-gray-400 hover:text-white">
-                  Market Trends 2026
+                  Market notes
                 </button>
               </li>
               <li>
                 <button onClick={() => scrollTo('headquarters-section')} className="text-gray-400 hover:text-white">
-                  Preatoni Tower JLT
+                  Dubai office
                 </button>
               </li>
               <li>
@@ -173,12 +170,6 @@ export const Footer: React.FC = () => {
               </li>
             </ul>
 
-            <div className="pt-3">
-              <div className="p-3 bg-black/60 border border-gray-800 text-[11px] text-gray-400">
-                <span className="font-bold text-gray-300 block mb-1 uppercase tracking-wider text-[10px]">Official Domain</span>
-                <span className="font-mono text-[#D32F2F] font-bold">ferroglobal.ae</span>
-              </div>
-            </div>
           </div>
 
         </div>
@@ -190,8 +181,6 @@ export const Footer: React.FC = () => {
           </div>
 
           <div className="flex items-center gap-4">
-            <span>DOMAIN: FERROGLOBAL.AE</span>
-            <span>•</span>
             <button
               onClick={scrollToTop}
               className="inline-flex items-center gap-1 text-gray-400 hover:text-white transition-colors"

@@ -16,7 +16,7 @@ import { CmsAdminModal } from './components/CmsAdminModal';
 export default function App() {
   return (
     <CmsProvider>
-      <div className="min-h-screen bg-[#0b0f17] text-slate-100 font-sans flex flex-col selection:bg-red-600 selection:text-white">
+      <div className="min-h-screen bg-[#F8F9FA] text-[#1A1A1A] font-sans flex flex-col selection:bg-red-600 selection:text-white">
         {/* Navigation Bar */}
         <Header />
 

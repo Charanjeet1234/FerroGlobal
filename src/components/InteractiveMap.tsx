@@ -6,7 +6,6 @@ import {
   Navigation,
   Clock,
   Phone,
-  Mail,
   Copy,
   Check,
   ExternalLink,
@@ -39,13 +38,13 @@ export const InteractiveMap: React.FC = () => {
         <div className="text-left max-w-3xl mb-12">
           <div className="inline-flex items-center gap-2 text-xs font-bold text-[#D32F2F] uppercase tracking-[0.25em] mb-2">
             <span className="w-2 h-2 bg-[#D32F2F]" />
-            <span>Operational Center & Commercial Desk</span>
+            <span>Dubai office and contact</span>
           </div>
           <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-black text-[#1A1A1A] uppercase tracking-tight">
-            DUBAI HEADQUARTERS & LOCATION MAP
+            FIND OUR DUBAI OFFICE
           </h2>
           <p className="text-gray-600 text-sm sm:text-base mt-2 font-normal">
-            Strategically located in Jumeirah Lakes Towers (JLT), Dubai—the premier Middle Eastern commodities and free zone trading hub.
+            Our trading desk is based in Jumeirah Lakes Towers, Dubai. Contact us about product availability, specifications and delivery requirements.
           </p>
         </div>
 
@@ -104,7 +103,7 @@ export const InteractiveMap: React.FC = () => {
               <div className="flex items-start gap-3">
                 <Clock className="w-4 h-4 text-[#D32F2F] mt-0.5 shrink-0" />
                 <div>
-                  <span className="font-bold text-[#1A1A1A] block uppercase tracking-wider text-[11px]">Trading Hours:</span>
+                    <span className="font-bold text-[#1A1A1A] block uppercase tracking-wider text-[11px]">Office hours:</span>
                   <span className="text-gray-600">{companyInfo.contact.workingHours}</span>
                 </div>
               </div>
@@ -112,7 +111,7 @@ export const InteractiveMap: React.FC = () => {
               <div className="flex items-start gap-3">
                 <Train className="w-4 h-4 text-[#D32F2F] mt-0.5 shrink-0" />
                 <div>
-                  <span className="font-bold text-[#1A1A1A] block uppercase tracking-wider text-[11px]">Public Transit Accessibility:</span>
+                  <span className="font-bold text-[#1A1A1A] block uppercase tracking-wider text-[11px]">Getting here:</span>
                   <span className="text-gray-600">5-minute walk from DMCC Metro Station (Red Line)</span>
                 </div>
               </div>
@@ -120,7 +119,7 @@ export const InteractiveMap: React.FC = () => {
               <div className="flex items-start gap-3">
                 <Ship className="w-4 h-4 text-[#D32F2F] mt-0.5 shrink-0" />
                 <div>
-                  <span className="font-bold text-[#1A1A1A] block uppercase tracking-wider text-[11px]">Maritime Port Link:</span>
+                  <span className="font-bold text-[#1A1A1A] block uppercase tracking-wider text-[11px]">Port access:</span>
                   <span className="text-gray-600">Direct 20-minute freight corridor to Jebel Ali Port (DP World)</span>
                 </div>
               </div>

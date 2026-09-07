@@ -2,19 +2,14 @@ import React, { useState } from 'react';
 import { useCms } from '../context/CmsContext';
 import { Product } from '../types';
 import {
-  Layers,
-  FlaskConical,
   FileSpreadsheet,
   ArrowUpRight,
-  Filter,
-  CheckCircle2,
-  Boxes,
   ShieldCheck,
 } from 'lucide-react';
 
 export const ProductCatalog: React.FC = () => {
   const { products, setSelectedProductForModal, setRfqPreselectedProduct } = useCms();
-  const [activeCategory, setActiveCategory] = useState<'all' | 'ferro-alloys' | 'metals-scrap' | 'minerals-ores'>('all');
+  const [activeCategory, setActiveCategory] = useState<'all' | 'ferro-alloys' | 'minerals-ores'>('all');
 
   const filteredProducts = products.filter((p) => {
     if (activeCategory === 'all') return true;
@@ -44,13 +39,13 @@ export const ProductCatalog: React.FC = () => {
           <div>
             <div className="flex items-center gap-2 text-xs font-bold text-[#D32F2F] uppercase tracking-[0.25em] mb-2">
               <span className="w-2 h-2 bg-[#D32F2F]" />
-              <span>Full Product Range & Sourcing Specifications</span>
+              <span>Products and specifications</span>
             </div>
             <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-black text-[#1A1A1A] uppercase tracking-tight">
-              METALLURGICAL ALLOY CATALOG
+              SIX CORE MATERIALS
             </h2>
             <p className="text-gray-600 text-sm sm:text-base max-w-2xl mt-2 font-normal">
-              All bulk ferroalloys, noble alloys, continuous casting billets, and ores supplied in conformity with ASTM, DIN, and ISO standards with certified third-party lab assays.
+              Select a product to review available grades, chemistry, sizing, packing, origin and applications. Send the details with your enquiry for a commercial quotation.
             </p>
           </div>
 
@@ -75,16 +70,6 @@ export const ProductCatalog: React.FC = () => {
               }`}
             >
               Ferro Alloys
-            </button>
-            <button
-              onClick={() => setActiveCategory('metals-scrap')}
-              className={`px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider transition-all ${
-                activeCategory === 'metals-scrap'
-                  ? 'bg-[#D32F2F] text-white shadow-xs'
-                  : 'text-gray-600 hover:text-black hover:bg-gray-100'
-              }`}
-            >
-              Metals & Scrap
             </button>
             <button
               onClick={() => setActiveCategory('minerals-ores')}
@@ -113,7 +98,11 @@ export const ProductCatalog: React.FC = () => {
                   src={product.imageUrl}
                   alt={product.name}
                   className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
-                  loading="lazy"
+                    loading="eager"
+                    onError={(event) => {
+                      event.currentTarget.onerror = null;
+                      event.currentTarget.src = 'https://www.sfaglobex.ae/assets/Ferro_silicon-CxA40zQs.jpg';
+                    }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                 
@@ -153,8 +142,8 @@ export const ProductCatalog: React.FC = () => {
                 {/* Chemical Assay Summary Pill Grid */}
                 <div className="space-y-1.5 pt-3 border-t border-gray-100">
                   <div className="flex items-center justify-between text-[11px] text-gray-500 font-mono">
-                    <span className="font-bold uppercase tracking-wider">Certified Assay</span>
-                    <span className="text-[#D32F2F] font-semibold">SGS SLA</span>
+                    <span className="font-bold uppercase tracking-wider">Specification summary</span>
+                    <span className="text-[#D32F2F] font-semibold">Available on request</span>
                   </div>
                   <div className="grid grid-cols-2 gap-1.5 text-xs">
                     {product.composition.slice(0, 4).map((comp, idx) => (
@@ -206,10 +195,10 @@ export const ProductCatalog: React.FC = () => {
             </div>
             <div>
               <h4 className="text-base font-bold text-[#1A1A1A] font-heading uppercase tracking-tight">
-                Custom Chemistry & Particle Sizing Available
+                Need a different grade or packing format?
               </h4>
               <p className="text-xs text-gray-600 mt-1 max-w-2xl leading-relaxed">
-                Require low-phosphorus (P &lt; 0.10%), low-titanium, or special screen sizing (0.2–2mm cored wire additions)? Our metallurgists formulate custom heats directly with partner smelters.
+                Include your chemistry, size, packing, quantity and destination in the enquiry. Our trading desk will review suitable supply options.
               </p>
             </div>
           </div>
@@ -217,7 +206,7 @@ export const ProductCatalog: React.FC = () => {
             onClick={() => handleRequestQuote(products[0])}
             className="shrink-0 px-6 py-3 bg-[#1A1A1A] hover:bg-black text-white text-xs font-bold uppercase tracking-wider transition-colors shadow-xs"
           >
-            Request Custom Specification
+            Discuss your requirement
           </button>
         </div>
 

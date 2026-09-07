@@ -43,7 +43,6 @@ export interface BlogPost {
 export interface CompanyInfo {
   name: string;
   tradingName: string;
-  domain: string;
   tagline: string;
   establishedYear: number;
   headquarters: {

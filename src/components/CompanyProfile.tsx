@@ -5,12 +5,7 @@ import {
   Shield,
   Anchor,
   Globe,
-  Award,
   CheckCircle2,
-  Scale,
-  FileCheck,
-  TrendingUp,
-  Cpu,
 } from 'lucide-react';
 
 export const CompanyProfile: React.FC = () => {
@@ -24,13 +19,13 @@ export const CompanyProfile: React.FC = () => {
         <div className="text-left max-w-3xl mb-14">
           <div className="inline-flex items-center gap-2 text-xs font-bold text-[#D32F2F] uppercase tracking-[0.25em] mb-2">
             <span className="w-2 h-2 bg-[#D32F2F]" />
-            <span>Corporate Heritage & Operating Philosophy</span>
+            <span>About Ferro Global</span>
           </div>
           <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-black text-[#1A1A1A] uppercase tracking-tight">
-            BUILT FOR STABILITY. DRIVEN BY PRECISION.
+            A practical partner for industrial raw materials.
           </h2>
           <p className="text-gray-600 text-sm sm:text-base mt-3 leading-relaxed font-normal">
-            Headquartered in Dubai, UAE, <strong>{companyInfo.name}</strong> operates as a dedicated global industrial sourcing partner. We deliver tailored raw material solutions to meet the demanding metallurgical, physical, and chemical requirements of modern steel producers, foundries, and industrial smelters worldwide.
+            <strong>{companyInfo.name}</strong> is a Dubai-based trading company serving steel producers, foundries and industrial buyers. We help buyers source the right ferro alloy or manganese ore for their grade, volume, origin and delivery requirements.
           </p>
         </div>
 
@@ -40,13 +35,13 @@ export const CompanyProfile: React.FC = () => {
             <div className="p-8 bg-[#F8F9FA] border border-gray-200 border-l-4 border-l-[#D32F2F] space-y-4 shadow-xs">
               <h3 className="text-lg sm:text-xl font-bold font-heading text-[#1A1A1A] uppercase tracking-tight flex items-center gap-2">
                 <Building2 className="w-5 h-5 text-[#D32F2F]" />
-                <span>The Ferro Global Advantage</span>
+                <span>What we do</span>
               </h3>
               <p className="text-sm text-gray-600 leading-relaxed">
-                Founded to bridge primary smelters and international steel complexes, our trading infrastructure combines deep metallurgical domain mastery with agile physical logistics. Operating from Dubai’s vibrant commodity corridor in Jumeirah Lakes Towers (JLT), we oversee multi-origin shipments across five continents.
+                We work with producers and buyers to arrange material for steelmaking, alloy production and foundry use. Our role covers product selection, commercial coordination, documentation and shipment follow-up.
               </p>
               <p className="text-sm text-gray-600 leading-relaxed">
-                Whether supplying 5,000 MT breakbulk parcel shipments of High Carbon Silico Manganese or high-purity Ferro Molybdenum in certified steel drums, our contracts are anchored in verifiable consistency, guaranteed sizing distributions, and strict compliance with ASTM and DIN standards.
+                Orders can be discussed by grade, chemistry, form, packing, quantity, destination and delivery schedule. Product information and inspection requirements are agreed before shipment.
               </p>
             </div>
 
@@ -84,16 +79,16 @@ export const CompanyProfile: React.FC = () => {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
                   <div className="absolute bottom-3 left-3 bg-[#1A1A1A] px-3 py-1 text-xs font-mono font-bold text-[#D32F2F] border border-gray-800">
-                    Third-Party Certified Inspection
+                    Buyer support and documentation
                   </div>
                 </div>
 
                 <div className="space-y-3">
                   <h4 className="font-heading text-base font-bold text-white uppercase tracking-wider">
-                    Independent Laboratory Verification
+                    Clear information before shipment
                   </h4>
                   <p className="text-xs text-gray-400 leading-relaxed">
-                    Every parcel undergoes spectrographic assay, moisture testing, and sizing screen analysis at load port and discharge port through accredited international survey bodies:
+                    Buyers can request product specifications, certificates of analysis and third-party inspection arrangements as part of the quotation process:
                   </p>
                   <div className="grid grid-cols-2 gap-2 text-xs pt-2">
                     {companyInfo.certifications.map((cert, idx) => (
@@ -107,8 +102,8 @@ export const CompanyProfile: React.FC = () => {
               </div>
 
               <div className="pt-4 border-t border-gray-800 flex items-center justify-between text-xs">
-                <span className="text-gray-400 uppercase tracking-widest text-[10px]">Assay SLA</span>
-                <span className="font-mono text-[#D32F2F] font-bold">100% Guaranteed Tolerance</span>
+                <span className="text-gray-400 uppercase tracking-widest text-[10px]">Quality review</span>
+                <span className="font-mono text-[#D32F2F] font-bold">Specifications agreed in advance</span>
               </div>
             </div>
           </div>
@@ -121,13 +116,13 @@ export const CompanyProfile: React.FC = () => {
             <div className="lg:col-span-4 space-y-3">
               <div className="inline-flex items-center gap-1.5 text-xs font-bold text-[#D32F2F] uppercase tracking-wider">
                 <Globe className="w-4 h-4" />
-                <span>Global Transit Corridors</span>
+                <span>Markets and logistics</span>
               </div>
               <h3 className="font-heading text-2xl font-black text-[#1A1A1A] uppercase tracking-tight">
-                STRATEGIC MARITIME NETWORK
+                FROM DUBAI TO INDUSTRIAL MARKETS
               </h3>
               <p className="text-xs text-gray-600 leading-relaxed font-normal">
-                Positioned at the crossroads of east-west commerce, Ferro Global Trading LLC coordinates dedicated vessel charters and containerized freight connecting key global steel manufacturing clusters.
+                Our Dubai office coordinates enquiries and shipments for buyers across the Middle East, Europe, Africa, India and Turkey, with delivery arranged to the required port or market.
               </p>
             </div>
 
@@ -140,10 +135,21 @@ export const CompanyProfile: React.FC = () => {
                   <Anchor className="w-4 h-4 text-[#D32F2F] shrink-0" />
                   <div>
                     <span className="text-xs font-bold text-gray-800 block">{port}</span>
-                    <span className="text-[10px] text-gray-500 uppercase">Regular Vessel Discharge</span>
+                    <span className="text-[10px] text-gray-500 uppercase">Delivery point</span>
                   </div>
                 </div>
               ))}
+            </div>
+
+            <div className="lg:col-span-12 pt-5 border-t border-gray-200">
+              <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-500">Markets served</span>
+              <div className="flex flex-wrap gap-2 mt-3">
+                {companyInfo.targetRegions.map((region) => (
+                  <span key={region} className="px-3 py-1.5 bg-white border border-gray-200 text-xs font-semibold text-gray-700">
+                    {region}
+                  </span>
+                ))}
+              </div>
             </div>
 
           </div>

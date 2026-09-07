@@ -38,7 +38,7 @@ export const ProductDetailModal: React.FC = () => {
     // Generate an instant clean text/spec manifest file for metallurgical buyers
     const specContent = `FERRO GLOBAL TRADING LLC - TECHNICAL DATA SHEET
 Commodity: ${product.name} (${product.chemicalFormula})
-Domain: ferroglobal.ae | Headquarters: Dubai, UAE
+Headquarters: Dubai, UAE
 Export Inquiries: sales@ferroglobal.ae | +971 4 458 0205
 
 =========================================
@@ -195,15 +195,15 @@ Issued by: Ferro Global Trading LLC, Office 2005, Preatoni Tower, Cluster L, JLT
             <div className="p-4 bg-white border border-gray-200 space-y-3 shadow-xs">
               <h5 className="text-xs font-bold text-[#D32F2F] uppercase tracking-wider flex items-center gap-1.5">
                 <Globe className="w-3.5 h-3.5" />
-                <span>Origins & Independent Quality Control</span>
+                <span>Origin and inspection</span>
               </h5>
               <div className="text-xs space-y-1.5">
                 <div>
-                  <span className="text-gray-500 font-medium">Smelter Origins: </span>
+                  <span className="text-gray-500 font-medium">Origin: </span>
                   <span className="text-gray-900 font-bold">{product.specs.origin}</span>
                 </div>
                 <div>
-                  <span className="text-gray-500 font-medium">Inspection SLA: </span>
+                  <span className="text-gray-500 font-medium">Inspection: </span>
                   <span className="text-gray-900 font-bold">{product.specs.inspection}</span>
                 </div>
               </div>
@@ -213,7 +213,7 @@ Issued by: Ferro Global Trading LLC, Office 2005, Preatoni Tower, Cluster L, JLT
           {/* Metallurgical Applications */}
           <div className="p-4 bg-[#F8F9FA] border border-gray-200">
             <h5 className="text-xs font-bold text-[#1A1A1A] uppercase tracking-wider mb-2">
-              Recommended Industrial Applications:
+              Typical applications:
             </h5>
             <ul className="space-y-1.5 text-xs text-gray-600">
               {product.specs.applications.map((app, idx) => (

@@ -6,12 +6,11 @@ import {
   ArrowRight,
   Ship,
   Layers,
-  ChevronRight,
-  CheckCircle,
 } from 'lucide-react';
 
 export const Hero: React.FC = () => {
   const { companyInfo, products } = useCms();
+  const featuredProducts = products.filter((product) => product.featured).slice(0, 4);
 
   const scrollTo = (id: string) => {
     const el = document.getElementById(id);
@@ -48,38 +47,38 @@ export const Hero: React.FC = () => {
             <div className="inline-flex items-center gap-2 mb-4">
               <span className="w-2 h-2 bg-[#D32F2F]" />
               <span className="text-[11px] uppercase tracking-[0.25em] font-bold text-gray-500">
-                Dubai Star, Cluster L, JLT • ferroglobal.ae
+                Dubai, UAE • Ferro alloy trading and supply
               </span>
             </div>
 
             {/* Bold Display Headline matching Geometric Balance */}
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black leading-none tracking-tighter mb-4 text-[#1A1A1A]">
+            <h1 className="text-4xl sm:text-5xl lg:text-[4.5rem] font-black leading-[0.92] tracking-tighter mb-4 text-[#1A1A1A]">
               FERRO GLOBAL <br />
               <span className="text-[#D32F2F]">TRADING LLC</span>
             </h1>
 
             {/* Descriptive Lead */}
             <p className="text-base sm:text-lg text-gray-600 max-w-xl leading-relaxed mb-6 font-normal">
-              Premium sourcing and international distribution of high-grade ferro alloys, continuous cast billets, and smelting ores. Engineered for stability, delivered for global industrial reliability.
+              We help steelmakers, foundries and industrial buyers source the right ferro alloy or manganese ore for their production needs, with clear specifications and dependable support from enquiry to delivery.
             </p>
 
             {/* Verification Pillars */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 py-3 border-t border-gray-100 mb-6 text-xs text-gray-600 font-medium">
               <div className="flex items-center gap-2">
                 <ShieldCheck className="w-4 h-4 text-[#D32F2F] shrink-0" />
-                <span>SGS & Intertek Chemical Assays</span>
+                <span>Chemistry and sizing agreed before shipment</span>
               </div>
               <div className="flex items-center gap-2">
                 <Ship className="w-4 h-4 text-[#D32F2F] shrink-0" />
-                <span>Direct Maritime Logistics via Jebel Ali</span>
+                <span>Port and delivery coordination from Dubai</span>
               </div>
               <div className="flex items-center gap-2">
                 <TrendingUp className="w-4 h-4 text-[#D32F2F] shrink-0" />
-                <span>Hedging & Structured Trade Finance</span>
+                <span>Flexible shipment and payment discussions</span>
               </div>
               <div className="flex items-center gap-2">
                 <Layers className="w-4 h-4 text-[#D32F2F] shrink-0" />
-                <span>ASTM / DIN Conformity for EAF Furnaces</span>
+                <span>Material for steelmaking and foundry operations</span>
               </div>
             </div>
 
@@ -90,7 +89,7 @@ export const Hero: React.FC = () => {
                 onClick={() => scrollTo('contact-section')}
                 className="bg-[#1A1A1A] hover:bg-black text-white px-8 py-3.5 font-bold text-xs uppercase tracking-wider transition-colors shadow-xs inline-flex items-center gap-2"
               >
-                <span>Download Catalog & Quote</span>
+                <span>Request a quotation</span>
                 <ArrowRight className="w-3.5 h-3.5 text-[#D32F2F]" />
               </button>
 
@@ -99,7 +98,7 @@ export const Hero: React.FC = () => {
                 onClick={() => scrollTo('products-section')}
                 className="border-2 border-[#1A1A1A] hover:bg-gray-100 text-[#1A1A1A] px-8 py-3.5 font-bold text-xs uppercase tracking-wider transition-colors"
               >
-                Global Portfolio
+                View products
               </button>
             </div>
           </div>
@@ -113,44 +112,27 @@ export const Hero: React.FC = () => {
                     Product Portfolio
                   </h3>
                   <p className="text-xs text-gray-400 mt-1">
-                    Prime smelter allocations in 1 MT big bags
+                    Six core products for industrial buyers
                   </p>
                 </div>
                 <span className="text-4xl font-light text-gray-600">01</span>
               </div>
 
               <div className="space-y-4">
-                <div className="border-b border-gray-800 pb-3 flex justify-between items-center group cursor-pointer" onClick={() => scrollTo('products-section')}>
-                  <div>
-                    <span className="text-base font-semibold text-white group-hover:text-[#D32F2F] transition-colors">Ferro Chrome</span>
-                    <span className="block text-[11px] text-gray-400">High Carbon (60%–65% Cr) / Low Carbon</span>
-                  </div>
-                  <span className="font-mono text-xs text-[#D32F2F] font-bold">FeCr</span>
-                </div>
-
-                <div className="border-b border-gray-800 pb-3 flex justify-between items-center group cursor-pointer" onClick={() => scrollTo('products-section')}>
-                  <div>
-                    <span className="text-base font-semibold text-white group-hover:text-[#D32F2F] transition-colors">Ferro Manganese</span>
-                    <span className="block text-[11px] text-gray-400">High Carbon 75% / Medium & Low Carbon</span>
-                  </div>
-                  <span className="font-mono text-xs text-[#D32F2F] font-bold">FeMn</span>
-                </div>
-
-                <div className="border-b border-gray-800 pb-3 flex justify-between items-center group cursor-pointer" onClick={() => scrollTo('products-section')}>
-                  <div>
-                    <span className="text-base font-semibold text-white group-hover:text-[#D32F2F] transition-colors">Silico Manganese</span>
-                    <span className="block text-[11px] text-gray-400">Grades 60/14, 65/15 & 65/16 available</span>
-                  </div>
-                  <span className="font-mono text-xs text-[#D32F2F] font-bold">SiMn</span>
-                </div>
-
-                <div className="border-b border-gray-800 pb-3 flex justify-between items-center group cursor-pointer" onClick={() => scrollTo('products-section')}>
-                  <div>
-                    <span className="text-base font-semibold text-white group-hover:text-[#D32F2F] transition-colors">Ferro Silicon</span>
-                    <span className="block text-[11px] text-gray-400">Precision 70% & 75% Si deoxidizer</span>
-                  </div>
-                  <span className="font-mono text-xs text-[#D32F2F] font-bold">FeSi</span>
-                </div>
+                {featuredProducts.map((product) => (
+                  <button
+                    key={product.id}
+                    type="button"
+                    className="w-full border-b border-gray-800 pb-3 flex justify-between items-center group text-left"
+                    onClick={() => scrollTo('products-section')}
+                  >
+                    <span>
+                      <span className="text-base font-semibold text-white group-hover:text-[#D32F2F] transition-colors">{product.name}</span>
+                      <span className="block text-[11px] text-gray-400 line-clamp-1">{product.tagline}</span>
+                    </span>
+                    <span className="font-mono text-xs text-[#D32F2F] font-bold">{product.chemicalFormula}</span>
+                  </button>
+                ))}
               </div>
             </div>
 
@@ -162,7 +144,7 @@ export const Hero: React.FC = () => {
                 Explore Full Inventory ({products.length} Items)
               </button>
               <span className="text-[10px] text-gray-400 uppercase tracking-widest font-mono">
-                Jebel Ali Ready
+                Dubai trading desk
               </span>
             </div>
           </div>

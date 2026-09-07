@@ -2,13 +2,9 @@ import React, { useState } from 'react';
 import { useCms } from '../context/CmsContext';
 import { BlogPost } from '../types';
 import {
-  Newspaper,
   Calendar,
   Clock,
   ArrowRight,
-  TrendingUp,
-  Tag,
-  Bookmark,
 } from 'lucide-react';
 
 export const NewsSection: React.FC = () => {
@@ -31,13 +27,13 @@ export const NewsSection: React.FC = () => {
           <div>
             <div className="inline-flex items-center gap-2 text-xs font-bold text-[#D32F2F] uppercase tracking-[0.25em] mb-2">
               <span className="w-2 h-2 bg-[#D32F2F]" />
-              <span>Industry Updates & Market Insights</span>
+              <span>Notes from the trading desk</span>
             </div>
             <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-black text-[#1A1A1A] uppercase tracking-tight">
-              METALLURGICAL INTELLIGENCE & NEWS
+              MARKET NOTES & COMPANY NEWS
             </h2>
             <p className="text-gray-600 text-sm sm:text-base mt-2 max-w-2xl font-normal">
-              Strategic commodity price benchmarks, raw material supply dynamics, and green steel decarbonization updates compiled by our trading specialists.
+              Short updates on ferro alloy markets, steelmaking inputs, logistics and the work behind each shipment.
             </p>
           </div>
 
@@ -47,6 +43,7 @@ export const NewsSection: React.FC = () => {
               <button
                 key={cat}
                 onClick={() => setSelectedTag(cat)}
+                aria-pressed={selectedTag === cat}
                 className={`px-3 py-1.5 text-xs font-bold uppercase tracking-wider transition-all ${
                   selectedTag === cat
                     ? 'bg-[#1A1A1A] text-white shadow-xs'
@@ -61,21 +58,33 @@ export const NewsSection: React.FC = () => {
 
         {/* Dynamic News Grid - Geometric Balance clean white cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {filteredPosts.map((post) => (
+          {filteredPosts.map((post, index) => (
             <article
               key={post.id}
               id={`blog-post-${post.id}`}
               onClick={() => setSelectedArticleForModal(post)}
-              className="group bg-white border border-gray-200 hover:border-[#D32F2F] shadow-xs overflow-hidden cursor-pointer flex flex-col justify-between transition-all duration-200 text-left"
+              onKeyDown={(event) => {
+                if (event.key === 'Enter' || event.key === ' ') {
+                  event.preventDefault();
+                  setSelectedArticleForModal(post);
+                }
+              }}
+              role="button"
+              tabIndex={0}
+              className={`group bg-white border border-gray-200 hover:border-[#D32F2F] shadow-xs overflow-hidden cursor-pointer flex flex-col justify-between transition-all duration-200 text-left ${index === 0 ? 'lg:col-span-2' : ''}`}
             >
               <div>
                 {/* Article Image */}
-                <div className="relative h-44 w-full overflow-hidden bg-gray-100">
+                <div className={`relative aspect-video ${index === 0 ? 'lg:h-64 lg:aspect-auto' : 'sm:h-44 sm:aspect-auto'} w-full overflow-hidden bg-gray-100`}>
                   <img
                     src={post.imageUrl}
                     alt={post.title}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     loading="lazy"
+                    onError={(event) => {
+                      event.currentTarget.onerror = null;
+                      event.currentTarget.src = 'https://www.sfaglobex.ae/assets/ferro-manganese-banner-qBoKYnpf.jpg';
+                    }}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                   
@@ -109,7 +118,7 @@ export const NewsSection: React.FC = () => {
               </div>
 
               {/* Card Footer */}
-              <div className="px-5 pb-5 pt-3 border-t border-gray-100 flex items-center justify-between">
+              <div className="px-5 pb-5 pt-3 border-t border-gray-100 flex flex-wrap items-center justify-between gap-2">
                 <span className="text-[11px] font-bold text-gray-500 uppercase tracking-wider">
                   By {post.author}
                 </span>

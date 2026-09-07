@@ -42,9 +42,6 @@ export const ArticleModal: React.FC = () => {
             <span className="px-2.5 py-1 bg-[#D32F2F] text-white font-bold text-[10px] uppercase tracking-widest">
               {article.category}
             </span>
-            <span className="text-xs text-gray-400 font-mono">
-              ferroglobal.ae/insights
-            </span>
           </div>
 
           <button

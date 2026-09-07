@@ -3,18 +3,12 @@ import { useCms } from '../context/CmsContext';
 import { ContactInquiry } from '../types';
 import {
   FileSpreadsheet,
-  Send,
   CheckCircle,
   Copy,
   MessageSquare,
-  Sparkles,
   Phone,
   Mail,
   ShieldCheck,
-  Building,
-  Anchor,
-  Clock,
-  ArrowRight,
   RefreshCw,
 } from 'lucide-react';
 
@@ -97,7 +91,7 @@ Product: ${submittedInquiry.productName} (${submittedInquiry.grade})
 Quantity: ${submittedInquiry.quantityMT} MT
 Incoterm: ${submittedInquiry.incoterm} - Port: ${submittedInquiry.destinationPort}
 Email: ${submittedInquiry.email} | Phone: ${submittedInquiry.phone}
-Status: Received by Dubai Trading Desk (ferroglobal.ae)
+Status: Enquiry received by the Dubai trading desk
 Issued: ${new Date(submittedInquiry.timestamp).toLocaleString()}`;
 
     navigator.clipboard.writeText(summary);
@@ -119,7 +113,7 @@ Issued: ${new Date(submittedInquiry.timestamp).toLocaleString()}`;
 
   const whatsappMessageUrl = submittedInquiry
     ? `https://wa.me/${companyInfo.contact.whatsapp.replace(/\D/g, '')}?text=${encodeURIComponent(
-        `Hello Ferro Global Trading desk, I have generated automated RFQ Reference: ${submittedInquiry.id} for ${submittedInquiry.quantityMT} MT of ${submittedInquiry.productName} (${submittedInquiry.grade}). Please provide CIF / FOB pricing.`
+        `Hello Ferro Global Trading desk, I am following up on enquiry ${submittedInquiry.id} for ${submittedInquiry.quantityMT} MT of ${submittedInquiry.productName} (${submittedInquiry.grade}). Please share availability and CIF / FOB pricing.`
       )}`
     : `https://wa.me/${companyInfo.contact.whatsapp.replace(/\D/g, '')}`;
 
@@ -131,13 +125,13 @@ Issued: ${new Date(submittedInquiry.timestamp).toLocaleString()}`;
         <div className="text-left max-w-3xl mb-12">
           <div className="inline-flex items-center gap-2 text-xs font-bold text-[#D32F2F] uppercase tracking-[0.25em] mb-2">
             <span className="w-2 h-2 bg-[#D32F2F]" />
-            <span>Commercial Inquiries & Automated Quotations</span>
+            <span>Send an enquiry</span>
           </div>
           <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-black text-[#1A1A1A] uppercase tracking-tight">
-            AUTOMATED REQUEST FOR QUOTE (RFQ)
+            REQUEST A COMMERCIAL QUOTATION
           </h2>
           <p className="text-gray-600 text-sm sm:text-base mt-2 font-normal">
-            Submit your precise chemical grade requirements, destination port, and delivery volumes. Our Dubai trading desk returns official firm quotations within 4 business hours.
+            Tell us the product, grade, quantity and destination. Our Dubai trading desk will review the requirement and come back with availability, pricing and delivery options.
           </p>
         </div>
 
@@ -153,10 +147,10 @@ Issued: ${new Date(submittedInquiry.timestamp).toLocaleString()}`;
                   <CheckCircle className="w-6 h-6 text-emerald-600 shrink-0 mt-0.5" />
                   <div>
                     <h3 className="font-heading text-lg font-bold text-emerald-950 uppercase tracking-tight">
-                      Automated RFQ Ticket Generated & Dispatched
+                      Enquiry received
                     </h3>
                     <p className="text-xs text-emerald-800 mt-1 font-medium">
-                      Reference <strong className="font-mono text-emerald-950 font-bold">{submittedInquiry.id}</strong> has been logged directly into our Dubai trading pipeline. A dedicated metallurgical sales manager will confirm pricing.
+                      Your enquiry reference is <strong className="font-mono text-emerald-950 font-bold">{submittedInquiry.id}</strong>. Our trading desk will review the details and follow up with the next steps.
                     </p>
                   </div>
                 </div>
@@ -207,7 +201,7 @@ Issued: ${new Date(submittedInquiry.timestamp).toLocaleString()}`;
                     className="inline-flex items-center gap-2 bg-[#1A1A1A] hover:bg-black text-white px-5 py-3 text-xs font-bold uppercase tracking-wider transition-colors shadow-xs"
                   >
                     {copied ? <CheckCircle className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4" />}
-                    <span>{copied ? 'Summary Copied' : 'Copy RFQ Summary'}</span>
+                    <span>{copied ? 'Summary copied' : 'Copy enquiry summary'}</span>
                   </button>
 
                   <a
@@ -217,7 +211,7 @@ Issued: ${new Date(submittedInquiry.timestamp).toLocaleString()}`;
                     className="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white px-5 py-3 text-xs font-bold uppercase tracking-wider transition-colors shadow-xs"
                   >
                     <MessageSquare className="w-4 h-4" />
-                    <span>WhatsApp Desk</span>
+                    <span>Continue on WhatsApp</span>
                   </a>
 
                   <button
@@ -237,7 +231,7 @@ Issued: ${new Date(submittedInquiry.timestamp).toLocaleString()}`;
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-xs font-bold text-gray-800 uppercase tracking-wider mb-2">
-                      Target Alloy / Commodity *
+                      Product *
                     </label>
                     <select
                       value={formData.productId}
@@ -254,7 +248,7 @@ Issued: ${new Date(submittedInquiry.timestamp).toLocaleString()}`;
 
                   <div>
                     <label className="block text-xs font-bold text-gray-800 uppercase tracking-wider mb-2">
-                      Specific Commercial Grade *
+                      Grade *
                     </label>
                     <select
                       value={formData.grade}
@@ -274,7 +268,7 @@ Issued: ${new Date(submittedInquiry.timestamp).toLocaleString()}`;
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                   <div>
                     <label className="block text-xs font-bold text-gray-800 uppercase tracking-wider mb-2">
-                      Volume (Metric Tons MT) *
+                      Quantity (MT) *
                     </label>
                     <input
                       type="number"
@@ -289,7 +283,7 @@ Issued: ${new Date(submittedInquiry.timestamp).toLocaleString()}`;
 
                   <div>
                     <label className="block text-xs font-bold text-gray-800 uppercase tracking-wider mb-2">
-                      Incoterm Terms *
+                      Incoterm *
                     </label>
                     <select
                       value={formData.incoterm}
@@ -305,7 +299,7 @@ Issued: ${new Date(submittedInquiry.timestamp).toLocaleString()}`;
 
                   <div>
                     <label className="block text-xs font-bold text-gray-800 uppercase tracking-wider mb-2">
-                      Destination Discharge Port *
+                      Destination port *
                     </label>
                     <input
                       type="text"
@@ -322,7 +316,7 @@ Issued: ${new Date(submittedInquiry.timestamp).toLocaleString()}`;
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2 border-t border-gray-200">
                   <div>
                     <label className="block text-xs font-bold text-gray-800 uppercase tracking-wider mb-2">
-                      Company Name / Steelworks *
+                      Company / steelworks *
                     </label>
                     <input
                       type="text"
@@ -336,7 +330,7 @@ Issued: ${new Date(submittedInquiry.timestamp).toLocaleString()}`;
 
                   <div>
                     <label className="block text-xs font-bold text-gray-800 uppercase tracking-wider mb-2">
-                      Contact Person & Title *
+                      Contact person *
                     </label>
                     <input
                       type="text"
@@ -352,7 +346,7 @@ Issued: ${new Date(submittedInquiry.timestamp).toLocaleString()}`;
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-xs font-bold text-gray-800 uppercase tracking-wider mb-2">
-                      Corporate Email Address *
+                      Business email *
                     </label>
                     <input
                       type="email"
@@ -366,7 +360,7 @@ Issued: ${new Date(submittedInquiry.timestamp).toLocaleString()}`;
 
                   <div>
                     <label className="block text-xs font-bold text-gray-800 uppercase tracking-wider mb-2">
-                      Phone Number / WhatsApp *
+                      Phone / WhatsApp *
                     </label>
                     <input
                       type="tel"
@@ -382,7 +376,7 @@ Issued: ${new Date(submittedInquiry.timestamp).toLocaleString()}`;
                 {/* Additional Technical Notes */}
                 <div>
                   <label className="block text-xs font-bold text-gray-800 uppercase tracking-wider mb-2">
-                    Additional Chemical Tolerances or Sizing Preferences (Optional)
+                    Notes on chemistry, sizing or delivery (Optional)
                   </label>
                   <textarea
                     rows={3}
@@ -400,11 +394,11 @@ Issued: ${new Date(submittedInquiry.timestamp).toLocaleString()}`;
                   className="w-full py-4 bg-[#D32F2F] hover:bg-[#b71c1c] active:bg-[#9a1414] disabled:opacity-50 text-white font-bold tracking-wider uppercase text-xs transition-all flex items-center justify-center gap-2 shadow-xs cursor-pointer"
                 >
                   {isSubmitting ? (
-                    <span>Processing Automated Quotation...</span>
+                      <span>Sending enquiry...</span>
                   ) : (
                     <>
                       <FileSpreadsheet className="w-4 h-4" />
-                      <span>Generate Automated Quotation Request</span>
+                      <span>Send enquiry</span>
                     </>
                   )}
                 </button>
@@ -445,7 +439,7 @@ Issued: ${new Date(submittedInquiry.timestamp).toLocaleString()}`;
                     <Mail className="w-4 h-4" />
                   </div>
                   <div>
-                    <span className="text-[10px] text-gray-500 uppercase block font-mono font-bold">Commercial Inquiries</span>
+                    <span className="text-[10px] text-gray-500 uppercase block font-mono font-bold">Sales enquiries</span>
                     <span className="font-bold text-[#1A1A1A] text-sm">{companyInfo.contact.emailSales}</span>
                   </div>
                 </a>
@@ -470,20 +464,20 @@ Issued: ${new Date(submittedInquiry.timestamp).toLocaleString()}`;
             {/* Trading Commitments */}
             <div className="p-6 bg-white border border-gray-200 text-xs space-y-3 shadow-xs">
               <h4 className="font-bold text-[#1A1A1A] font-heading uppercase tracking-wide">
-                Procurement Guarantees
+                What to include
               </h4>
               <ul className="space-y-2 text-gray-600">
                 <li className="flex items-start gap-2">
                   <span className="w-1.5 h-1.5 bg-[#D32F2F] mt-1.5 shrink-0" />
-                  <span><strong>Binding Assays:</strong> Pre-shipment SGS / Intertek assay certificates issued at origin.</span>
+                  <span><strong>Product:</strong> Grade, chemistry, size and preferred form.</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="w-1.5 h-1.5 bg-[#D32F2F] mt-1.5 shrink-0" />
-                  <span><strong>Trade Financing:</strong> Documentary Letters of Credit (LC) at sight or deferred terms.</span>
+                  <span><strong>Quantity:</strong> Required tonnage, destination and target delivery date.</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="w-1.5 h-1.5 bg-[#D32F2F] mt-1.5 shrink-0" />
-                  <span><strong>Packing Standard:</strong> Heavy-duty 1 MT Big Bags with water-resistant polyethylene liners.</span>
+                  <span><strong>Commercial terms:</strong> Preferred Incoterm and inspection or documentation needs.</span>
                 </li>
               </ul>
             </div>

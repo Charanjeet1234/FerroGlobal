@@ -226,7 +226,7 @@ export const SearchBarModal: React.FC = () => {
         {/* Modal Footer */}
         <div className="p-3 bg-[#F8F9FA] border-t border-gray-200 text-[10px] uppercase tracking-widest text-gray-500 flex items-center justify-between">
           <span>Press ESC or click outside to close</span>
-          <span className="font-mono text-[#D32F2F] font-bold">ferroglobal.ae search index</span>
+          <span className="font-mono text-[#D32F2F] font-bold">Ferro Global search</span>
         </div>
 
       </div>

@@ -8,7 +8,6 @@ import {
   FileSpreadsheet,
   Menu,
   X,
-  Layers,
   ChevronDown,
   ArrowRight,
   Database,
@@ -107,7 +106,7 @@ export const Header: React.FC = () => {
             className="focus:outline-none"
             aria-label="Ferro Global Trading LLC Home"
           >
-            <Logo showCustomSlotPrompt={true} />
+            <Logo />
           </a>
         </div>
 
@@ -199,13 +198,13 @@ export const Header: React.FC = () => {
           </button>
         </nav>
 
-        {/* Action Controls: Search Bar Trigger & Automated RFQ Button */}
+        {/* Action controls */}
         <div className="flex items-center gap-3">
           {/* Search Bar - styled after the Geometric Balance rounded pill */}
           <button
             id="global-search-trigger-btn"
             onClick={() => setIsSearchOpen(true)}
-            className="flex items-center bg-gray-100 hover:bg-gray-200/80 rounded-full px-4 py-2 w-48 sm:w-60 text-gray-500 text-xs font-medium transition-all"
+            className="hidden md:flex items-center bg-gray-100 hover:bg-gray-200/80 rounded-full px-4 py-2 w-48 sm:w-60 text-gray-500 text-xs font-medium transition-all"
             title="Search products, grades, and specifications (Cmd+K)"
           >
             <Search className="w-4 h-4 text-gray-400 shrink-0" />
@@ -292,7 +291,7 @@ export const Header: React.FC = () => {
               onClick={() => scrollToSection('contact-section')}
               className="text-left py-1 text-gray-800 hover:text-[#D32F2F]"
             >
-              Automated RFQ & Contact
+              Request a quotation
             </button>
           </div>
 
