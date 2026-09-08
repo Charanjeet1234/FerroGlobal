@@ -90,11 +90,11 @@ export const CompanyProfile: React.FC = () => {
                   <p className="text-xs text-gray-400 leading-relaxed">
                     Buyers can request product specifications, certificates of analysis and third-party inspection arrangements as part of the quotation process:
                   </p>
-                  <div className="grid grid-cols-2 gap-2 text-xs pt-2">
+                  <div className="company-certifications grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs pt-2">
                     {companyInfo.certifications.map((cert, idx) => (
-                      <div key={idx} className="flex items-center gap-2 p-2 bg-gray-900 border border-gray-800 text-gray-200">
+                      <div key={idx} className="flex items-start gap-2 p-2 bg-gray-900 border border-gray-800 text-gray-200">
                         <CheckCircle2 className="w-3.5 h-3.5 text-[#D32F2F] shrink-0" />
-                        <span className="text-[11px] font-medium truncate">{cert}</span>
+                        <span className="text-[11px] font-medium leading-snug">{cert}</span>
                       </div>
                     ))}
                   </div>

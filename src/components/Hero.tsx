@@ -35,7 +35,7 @@ export const Hero: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
           
           {/* Main Hero Card with thick crimson left border */}
-          <div className="lg:col-span-7 bg-white p-8 sm:p-12 flex flex-col justify-center border-l-8 border-[#D32F2F] border-y border-r border-gray-200 relative overflow-hidden shadow-xs text-left">
+          <div className="hero-main-card hero-reveal lg:col-span-7 bg-white p-8 sm:p-12 flex flex-col justify-center border-l-8 border-[#D32F2F] border-y border-r border-gray-200 relative overflow-hidden shadow-xs text-left">
             {/* Background geometric watermark */}
             <div className="absolute top-0 right-0 p-6 opacity-5 pointer-events-none">
               <svg className="w-56 h-56 text-[#D32F2F]" fill="currentColor" viewBox="0 0 24 24">
@@ -62,8 +62,22 @@ export const Hero: React.FC = () => {
               We help steelmakers, foundries and industrial buyers source the right ferro alloy or manganese ore for their production needs, with clear specifications and dependable support from enquiry to delivery.
             </p>
 
+            {/* Proof of scale */}
+            <div className="hero-proof-grid grid grid-cols-2 gap-3 mb-6" aria-label="Ferro Global Trading scale">
+              <div className="border-l-4 border-[#D32F2F] bg-[#F8F9FA] px-4 py-3">
+                <div className="font-heading text-2xl sm:text-3xl font-black leading-none text-[#1A1A1A]">100,000+</div>
+                <div className="mt-1 text-[10px] font-bold uppercase tracking-[0.14em] text-[#D32F2F]">Metric tonnes shipped</div>
+                <div className="mt-1 text-[11px] leading-snug text-gray-500">Delivered to industrial buyers worldwide</div>
+              </div>
+              <div className="border-l-4 border-[#1A1A1A] bg-[#F8F9FA] px-4 py-3">
+                <div className="font-heading text-2xl sm:text-3xl font-black leading-none text-[#1A1A1A]">Global</div>
+                <div className="mt-1 text-[10px] font-bold uppercase tracking-[0.14em] text-[#D32F2F]">Customer network</div>
+                <div className="mt-1 text-[11px] leading-snug text-gray-500">Supporting steelmakers and foundries worldwide</div>
+              </div>
+            </div>
+
             {/* Verification Pillars */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 py-3 border-t border-gray-100 mb-6 text-xs text-gray-600 font-medium">
+            <div className="hero-verification grid grid-cols-1 sm:grid-cols-2 gap-3 py-3 border-t border-gray-100 mb-6 text-xs text-gray-600 font-medium">
               <div className="flex items-center gap-2">
                 <ShieldCheck className="w-4 h-4 text-[#D32F2F] shrink-0" />
                 <span>Chemistry and sizing agreed before shipment</span>
@@ -104,7 +118,7 @@ export const Hero: React.FC = () => {
           </div>
 
           {/* Right Geometric Portfolio Highlight Card (charcoal #1A1A1A) */}
-          <div className="lg:col-span-5 bg-[#1A1A1A] text-white p-8 sm:p-10 flex flex-col justify-between border border-gray-900 shadow-md text-left">
+          <div className="hero-portfolio hero-reveal lg:col-span-5 bg-[#1A1A1A] text-white p-8 sm:p-10 flex flex-col justify-between border border-gray-900 shadow-md text-left">
             <div>
               <div className="flex justify-between items-start mb-6">
                 <div>

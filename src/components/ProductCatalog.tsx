@@ -90,7 +90,7 @@ export const ProductCatalog: React.FC = () => {
             <div
               key={product.id}
               id={`product-card-${product.id}`}
-              className="group bg-white border border-gray-200 hover:border-[#D32F2F] shadow-xs transition-all duration-200 flex flex-col justify-between overflow-hidden text-left"
+              className="product-card group bg-white border border-gray-200 hover:border-[#D32F2F] shadow-xs transition-all duration-200 flex flex-col justify-between overflow-hidden text-left"
             >
               {/* Product Image and Formula Tag */}
               <div className="relative h-48 sm:h-52 w-full overflow-hidden bg-gray-100">

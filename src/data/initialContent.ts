@@ -4,9 +4,9 @@ export const initialCompanyInfo: CompanyInfo = {
   name: 'Ferro Global Trading LLC',
   tradingName: 'Ferro Global Trading LLC',
   tagline: 'Ferro alloy supply for steelmakers, foundries and industrial buyers',
-  establishedYear: 2025,
+  establishedYear: 2012,
   headquarters: {
-    address: 'Office 2005, Preatoni Tower (Dubai Star), Cluster L',
+    address: 'Office 2005, Preatoni Tower (Dubai Star)',
     tower: 'Preatoni Tower',
     cluster: 'Cluster L, Jumeirah Lakes Towers (JLT)',
     city: 'Dubai',
@@ -21,15 +21,15 @@ export const initialCompanyInfo: CompanyInfo = {
     phonePrimary: '+971 4 458 0205',
     phoneSecondary: '+971 52 442 6070',
     whatsapp: '+971524426070',
-    emailSales: 'sales@ferroglobal.ae',
-    emailInfo: 'info@ferroglobal.ae',
+    emailSales: 'ferro.global25@gmail.com',
+    emailInfo: 'ferro.global25@gmail.com',
     workingHours: 'Monday - Saturday: 09:00 AM – 06:00 PM (GST)',
   },
   metrics: [
     { label: 'Core product groups', value: '06', description: 'Ferro alloys and manganese ore for industrial production' },
     { label: 'Trading base', value: 'Dubai, UAE', description: 'Commercial coordination from Jumeirah Lakes Towers' },
     { label: 'Primary markets', value: '05', description: 'Middle East, Europe, Africa, India and Turkey' },
-    { label: 'Established', value: '2025', description: 'Built around practical sourcing and long-term buyer relationships' },
+    { label: 'Industry experience', value: '10+ years', description: 'Supporting steel, foundry and industrial raw material buyers since 2012' },
   ],
   values: [
     {

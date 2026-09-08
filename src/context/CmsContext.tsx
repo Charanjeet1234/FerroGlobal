@@ -43,7 +43,7 @@ const CmsContext = createContext<CmsContextType | undefined>(undefined);
 
 const LOCAL_STORAGE_KEY = 'ferro_global_cms_content_v10';
 const INQUIRIES_STORAGE_KEY = 'ferro_global_inquiries_v1';
-const LOGO_STORAGE_KEY = 'ferro_global_logo_url_v1';
+const LOGO_STORAGE_KEY = 'ferro_global_logo_url_v2';
 
 export const CmsProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [companyInfo, setCompanyInfo] = useState<CompanyInfo>(() => {
@@ -51,7 +51,40 @@ export const CmsProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       const saved = localStorage.getItem(LOCAL_STORAGE_KEY);
       if (saved) {
         const parsed = JSON.parse(saved);
-        if (parsed.companyInfo) return parsed.companyInfo;
+        if (parsed.companyInfo) {
+          const savedCompanyInfo = parsed.companyInfo as CompanyInfo;
+          const savedMetrics = savedCompanyInfo.metrics.map((metric) => (
+            metric.label === 'Established' && metric.value === '2025'
+              ? {
+                  ...metric,
+                  label: 'Industry experience',
+                  value: '10+ years',
+                  description: 'Supporting steel, foundry and industrial raw material buyers since 2012',
+                }
+              : metric
+          ));
+
+          return {
+            ...savedCompanyInfo,
+            establishedYear: savedCompanyInfo.establishedYear === 2025 ? 2012 : savedCompanyInfo.establishedYear,
+            headquarters: {
+              ...savedCompanyInfo.headquarters,
+              address: savedCompanyInfo.headquarters.address === 'Office 2005, Preatoni Tower (Dubai Star), Cluster L'
+                ? initialCompanyInfo.headquarters.address
+                : savedCompanyInfo.headquarters.address,
+            },
+            contact: {
+              ...savedCompanyInfo.contact,
+              emailSales: savedCompanyInfo.contact.emailSales === 'sales@ferroglobal.ae'
+                ? initialCompanyInfo.contact.emailSales
+                : savedCompanyInfo.contact.emailSales,
+              emailInfo: savedCompanyInfo.contact.emailInfo === 'info@ferroglobal.ae'
+                ? initialCompanyInfo.contact.emailInfo
+                : savedCompanyInfo.contact.emailInfo,
+            },
+            metrics: savedMetrics,
+          };
+        }
       }
     } catch {
       // fallback to initial

@@ -145,12 +145,12 @@ export const Header: React.FC = () => {
                       onClick={() => {
                         scrollToSection('products-section');
                       }}
-                      className="w-full text-left px-3 py-2 text-xs text-gray-700 hover:text-[#D32F2F] hover:bg-gray-50 flex items-center justify-between group"
+                      className="w-full text-left px-3 py-1.5 text-[11px] leading-snug text-gray-700 hover:text-[#D32F2F] hover:bg-gray-50 flex items-center justify-between gap-3 group"
                     >
                       <span className="font-semibold group-hover:text-[#D32F2F] transition-colors">
                         {p.name}
                       </span>
-                      <span className="text-[10px] font-mono text-gray-400">
+                      <span className="text-[9px] font-mono text-gray-400 shrink-0">
                         {p.chemicalFormula}
                       </span>
                     </button>

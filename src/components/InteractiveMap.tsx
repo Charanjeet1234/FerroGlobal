@@ -126,15 +126,15 @@ export const InteractiveMap: React.FC = () => {
             </div>
 
             {/* Direct Telephone Connections */}
-            <div className="pt-4 border-t border-gray-200 grid grid-cols-2 gap-3 text-xs">
+            <div className="direct-contact-grid pt-4 border-t border-gray-200 grid grid-cols-2 gap-3 text-xs">
               <a
                 href={`tel:${companyInfo.contact.phonePrimary.replace(/\s/g, '')}`}
                 className="p-3 bg-white border border-gray-200 hover:border-[#D32F2F] transition-colors"
               >
                 <span className="text-[10px] text-gray-500 uppercase block font-bold tracking-wider">Trading Desk</span>
-                <span className="font-bold text-[#1A1A1A] flex items-center gap-1 mt-0.5">
+                <span className="font-bold text-[#1A1A1A] flex items-center gap-1 mt-0.5 whitespace-nowrap">
                   <Phone className="w-3 h-3 text-[#D32F2F]" />
-                  <span>{companyInfo.contact.phonePrimary}</span>
+                  <span className="text-[11px]">{companyInfo.contact.phonePrimary}</span>
                 </span>
               </a>
 
@@ -143,9 +143,9 @@ export const InteractiveMap: React.FC = () => {
                 className="p-3 bg-white border border-gray-200 hover:border-[#D32F2F] transition-colors"
               >
                 <span className="text-[10px] text-gray-500 uppercase block font-bold tracking-wider">WhatsApp / Direct</span>
-                <span className="font-bold text-[#1A1A1A] flex items-center gap-1 mt-0.5">
+                <span className="font-bold text-[#1A1A1A] flex items-center gap-1 mt-0.5 whitespace-nowrap">
                   <Phone className="w-3 h-3 text-[#D32F2F]" />
-                  <span>{companyInfo.contact.phoneSecondary}</span>
+                  <span className="text-[11px]">{companyInfo.contact.phoneSecondary}</span>
                 </span>
               </a>
             </div>
@@ -153,7 +153,7 @@ export const InteractiveMap: React.FC = () => {
           </div>
 
           {/* Right Interactive Google Map Container - styled after Geometric Balance */}
-          <div className="lg:col-span-7 relative min-h-[420px] overflow-hidden border border-gray-200 bg-gray-200 shadow-xs flex flex-col">
+          <div className="interactive-map-panel lg:col-span-7 relative min-h-[420px] overflow-hidden border border-gray-200 bg-gray-200 shadow-xs flex flex-col">
             
             {/* Map Top Bar */}
             <div className="p-3 bg-white border-b border-gray-200 flex items-center justify-between z-10 text-xs">
@@ -166,16 +166,17 @@ export const InteractiveMap: React.FC = () => {
                   href={getDirectionsUrl}
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label="Open directions"
+                  title="Open directions"
                   className="text-xs font-bold uppercase tracking-wider text-[#D32F2F] hover:text-[#b71c1c] flex items-center gap-1"
                 >
-                  <span>Google Maps</span>
                   <ExternalLink className="w-3 h-3" />
                 </a>
               </div>
             </div>
 
             {/* Embedded Responsive Interactive Map */}
-            <div className="relative flex-1 w-full min-h-[360px]">
+            <div className="interactive-map-frame relative flex-1 w-full min-h-[360px]">
               <iframe
                 title="Ferro Global Trading LLC Headquarters Map"
                 src="https://maps.google.com/maps?q=Preatoni%20Tower%20Cluster%20L%20JLT%20Dubai&t=&z=15&ie=UTF8&iwloc=&output=embed"

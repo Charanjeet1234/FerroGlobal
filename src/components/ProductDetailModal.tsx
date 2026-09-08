@@ -39,7 +39,7 @@ export const ProductDetailModal: React.FC = () => {
     const specContent = `FERRO GLOBAL TRADING LLC - TECHNICAL DATA SHEET
 Commodity: ${product.name} (${product.chemicalFormula})
 Headquarters: Dubai, UAE
-Export Inquiries: sales@ferroglobal.ae | +971 4 458 0205
+Export Inquiries: ferro.global25@gmail.com | +971 4 458 0205
 
 =========================================
 1. PRODUCT DESCRIPTION

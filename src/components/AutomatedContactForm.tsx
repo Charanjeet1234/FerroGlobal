@@ -138,7 +138,7 @@ Issued: ${new Date(submittedInquiry.timestamp).toLocaleString()}`;
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           
           {/* Left Column: Form / Confirmation Screen */}
-          <div className="lg:col-span-8 bg-white border border-gray-200 border-l-8 border-l-[#D32F2F] p-6 sm:p-10 shadow-xs text-left">
+          <div className="rfq-card lg:col-span-8 bg-white border border-gray-200 border-l-8 border-l-[#D32F2F] p-6 sm:p-10 shadow-xs text-left">
             
             {submittedInquiry ? (
               /* Success / Automated Confirmation Screen */
@@ -225,7 +225,7 @@ Issued: ${new Date(submittedInquiry.timestamp).toLocaleString()}`;
               </div>
             ) : (
               /* The Interactive Automated Form */
-              <form onSubmit={handleSubmit} className="space-y-6">
+              <form onSubmit={handleSubmit} className="rfq-form space-y-6">
                 
                 {/* Product & Grade Selector */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -411,7 +411,7 @@ Issued: ${new Date(submittedInquiry.timestamp).toLocaleString()}`;
           <div className="lg:col-span-4 space-y-6 text-left">
             
             {/* Quick Contact Card */}
-            <div className="p-6 bg-white border border-gray-200 shadow-xs space-y-5">
+            <div className="desk-contact-card p-6 bg-white border border-gray-200 shadow-xs space-y-5">
               <h3 className="font-heading text-lg font-bold text-[#1A1A1A] uppercase tracking-tight flex items-center gap-2">
                 <ShieldCheck className="w-5 h-5 text-[#D32F2F]" />
                 <span>Dubai Trading Desk</span>
@@ -420,7 +420,7 @@ Issued: ${new Date(submittedInquiry.timestamp).toLocaleString()}`;
               <div className="space-y-3 text-xs">
                 <a
                   href={`tel:${companyInfo.contact.phonePrimary.replace(/\s/g, '')}`}
-                  className="p-3 bg-[#F8F9FA] border border-gray-200 flex items-center gap-3 hover:border-[#D32F2F] transition-colors"
+                  className="desk-channel p-3 bg-[#F8F9FA] border border-gray-200 flex items-center gap-3 hover:border-[#D32F2F] transition-colors"
                 >
                   <div className="p-2 bg-red-50 text-[#D32F2F]">
                     <Phone className="w-4 h-4" />
@@ -433,7 +433,7 @@ Issued: ${new Date(submittedInquiry.timestamp).toLocaleString()}`;
 
                 <a
                   href={`mailto:${companyInfo.contact.emailSales}`}
-                  className="p-3 bg-[#F8F9FA] border border-gray-200 flex items-center gap-3 hover:border-[#D32F2F] transition-colors"
+                  className="desk-channel p-3 bg-[#F8F9FA] border border-gray-200 flex items-center gap-3 hover:border-[#D32F2F] transition-colors"
                 >
                   <div className="p-2 bg-red-50 text-[#D32F2F]">
                     <Mail className="w-4 h-4" />
@@ -448,7 +448,7 @@ Issued: ${new Date(submittedInquiry.timestamp).toLocaleString()}`;
                   href={`https://wa.me/${companyInfo.contact.whatsapp.replace(/\D/g, '')}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-3 bg-emerald-50 border border-emerald-200 flex items-center gap-3 hover:bg-emerald-100/60 transition-colors"
+                  className="desk-channel p-3 bg-emerald-50 border border-emerald-200 flex items-center gap-3 hover:bg-emerald-100/60 transition-colors"
                 >
                   <div className="p-2 bg-emerald-600 text-white">
                     <MessageSquare className="w-4 h-4" />
@@ -462,7 +462,7 @@ Issued: ${new Date(submittedInquiry.timestamp).toLocaleString()}`;
             </div>
 
             {/* Trading Commitments */}
-            <div className="p-6 bg-white border border-gray-200 text-xs space-y-3 shadow-xs">
+            <div className="desk-commitments p-6 bg-white border border-gray-200 text-xs space-y-3 shadow-xs">
               <h4 className="font-bold text-[#1A1A1A] font-heading uppercase tracking-wide">
                 What to include
               </h4>

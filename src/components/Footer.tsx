@@ -3,14 +3,14 @@ import { useCms } from '../context/CmsContext';
 import { Logo } from './Logo';
 import {
   Building2,
+  Globe,
   Phone,
   Mail,
   ArrowUp,
-  Database,
 } from 'lucide-react';
 
 export const Footer: React.FC = () => {
-  const { companyInfo, products, setSelectedProductForModal, setIsCmsAdminOpen } = useCms();
+  const { companyInfo, products, setSelectedProductForModal } = useCms();
 
   const scrollToTop = () => {
     window.scrollTo({
@@ -45,7 +45,7 @@ export const Footer: React.FC = () => {
               Share your grade, quantity and destination with the Ferro Global trading desk.
             </p>
           </div>
-          <div className="flex items-center gap-3">
+          <div className="footer-cta-actions flex items-center gap-3">
             <button
               onClick={() => scrollTo('contact-section')}
               className="px-6 py-3 bg-[#D32F2F] hover:bg-[#b71c1c] text-white font-bold text-xs uppercase tracking-wider transition-colors shadow-xs"
@@ -91,6 +91,12 @@ export const Footer: React.FC = () => {
                   {companyInfo.contact.emailSales}
                 </a>
               </div>
+              <div className="flex items-center gap-2.5">
+                <Globe className="w-4 h-4 text-[#D32F2F] shrink-0" />
+                <a href="https://ferroglobal.ae/" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-white">
+                  ferroglobal.ae
+                </a>
+              </div>
             </div>
           </div>
 
@@ -106,7 +112,7 @@ export const Footer: React.FC = () => {
                   <li key={p.id}>
                     <button
                       onClick={() => setSelectedProductForModal(p)}
-                      className="text-xs text-gray-400 hover:text-[#D32F2F] transition-colors flex items-center justify-between w-full"
+                      className="footer-product-link text-xs text-gray-400 hover:text-[#D32F2F] transition-colors flex items-center justify-between w-full gap-3"
                     >
                       <span>{p.name}</span>
                       <span className="text-[10px] font-mono text-[#D32F2F]">{p.chemicalFormula}</span>
@@ -128,7 +134,7 @@ export const Footer: React.FC = () => {
                   <li key={p.id}>
                     <button
                       onClick={() => setSelectedProductForModal(p)}
-                      className="text-xs text-gray-400 hover:text-[#D32F2F] transition-colors flex items-center justify-between w-full"
+                      className="footer-product-link text-xs text-gray-400 hover:text-[#D32F2F] transition-colors flex items-center justify-between w-full gap-3"
                     >
                       <span>{p.name}</span>
                       <span className="text-[10px] font-mono text-[#D32F2F]">{p.chemicalFormula}</span>
@@ -138,10 +144,10 @@ export const Footer: React.FC = () => {
             </ul>
           </div>
 
-          {/* Column 4: Quality, Portals & Governance */}
+          {/* Column 4: Quality and resources */}
           <div className="lg:col-span-2 space-y-3">
             <h4 className="font-heading text-xs font-bold text-white uppercase tracking-[0.2em] border-b border-gray-800 pb-2">
-              Governance & Tools
+              Resources
             </h4>
             <ul className="space-y-2 text-xs">
               <li>
@@ -157,15 +163,6 @@ export const Footer: React.FC = () => {
               <li>
                 <button onClick={() => scrollTo('headquarters-section')} className="text-gray-400 hover:text-white">
                   Dubai office
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => setIsCmsAdminOpen(true)}
-                  className="text-[#D32F2F] hover:text-red-400 font-bold flex items-center gap-1 uppercase tracking-wider text-[11px]"
-                >
-                  <Database className="w-3 h-3" />
-                  <span>Headless CMS</span>
                 </button>
               </li>
             </ul>

@@ -30,6 +30,50 @@
   background: #D32F2F;
 }
 
+@keyframes ferro-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-reveal {
+  animation: ferro-reveal 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.hero-portfolio {
+  animation-delay: 120ms;
+}
+
+.product-card {
+  transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+}
+
+.product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 28px rgba(26, 26, 26, 0.1);
+}
+
+button,
+a {
+  transition-duration: 180ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
 @media (min-width: 1280px) {
   .max-w-7xl {
     max-width: 100% !important;
@@ -39,9 +83,33 @@
 }
 
 @media (max-width: 640px) {
+  #main-header {
+    padding-top: 0.5rem !important;
+    padding-bottom: 0.5rem !important;
+  }
+
+  #main-header #company-logo-container img {
+    width: 116px !important;
+  }
+
+  #main-header #mobile-menu-toggle-btn {
+    width: 2.75rem;
+    height: 2.75rem;
+    padding: 0.65rem;
+  }
+
+  #main-header > div:nth-child(2) {
+    min-height: 3.25rem;
+  }
+
+  #main-header + main {
+    overflow: hidden;
+  }
+
   main > section {
-    padding-top: 3rem !important;
-    padding-bottom: 3rem !important;
+    padding-top: 2.75rem !important;
+    padding-bottom: 2.75rem !important;
+    scroll-margin-top: 6rem;
   }
 
   main > section > div {
@@ -50,51 +118,211 @@
   }
 
   main > section h2 {
-    font-size: 2rem !important;
+    font-size: 1.75rem !important;
     line-height: 1.05 !important;
+    letter-spacing: -0.025em !important;
+  }
+
+  main > section button,
+  main > section a {
+    -webkit-tap-highlight-color: transparent;
   }
 
   #hero-section {
-    padding-top: 6rem !important;
-    padding-bottom: 2.5rem !important;
+    padding-top: 5.75rem !important;
+    padding-bottom: 2rem !important;
+  }
+
+  #hero-section .hero-main-card {
+    border-left-width: 4px;
+    box-shadow: 0 8px 24px rgba(26, 26, 26, 0.06);
+  }
+
+  #hero-section .hero-main-card > .absolute {
+    opacity: 0.035;
+    transform: scale(0.8);
+    transform-origin: top right;
+  }
+
+  #hero-section .hero-main-card > .inline-flex {
+    margin-bottom: 0.85rem;
+  }
+
+  #hero-section .hero-main-card > .inline-flex span:last-child {
+    font-size: 0.58rem;
+    line-height: 1.35;
+    letter-spacing: 0.14em;
   }
 
   #hero-section h1 {
-    font-size: 2.75rem !important;
-    line-height: 0.95 !important;
+    font-size: 1.8rem !important;
+    line-height: 0.98 !important;
+    letter-spacing: -0.035em !important;
+    margin-bottom: 0.9rem !important;
   }
 
   #hero-section > div > .grid:first-child {
     gap: 0.75rem;
   }
 
-  #hero-section > div > .grid:first-child > div {
-    padding: 1.5rem !important;
+  #hero-section > div > .grid:first-child > .hero-main-card {
+    padding: 1.25rem !important;
   }
 
   #hero-section button {
-    min-height: 2.75rem;
-    padding: 0.7rem 1rem !important;
-    font-size: 0.6875rem;
+    min-height: 2.5rem;
+    padding: 0.6rem 0.75rem !important;
+    font-size: 0.58rem;
+    letter-spacing: 0.08em;
   }
 
   #hero-section .mt-6 {
     margin-top: 0.75rem;
   }
 
-  #hero-section > div > .grid:first-child > div:last-child,
-  #hero-section h1 + p + div,
-  #hero-section .mt-6 .text-xs {
+  #hero-section > div > .grid:first-child > .hero-portfolio {
     display: none;
   }
 
+  #hero-section .hero-verification {
+    gap: 0.65rem;
+    margin-bottom: 1rem;
+    padding-top: 0.85rem;
+    font-size: 0.67rem;
+    line-height: 1.4;
+  }
+
+  #hero-section .hero-proof-grid {
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  #hero-section .hero-proof-grid > div {
+    min-width: 0;
+    padding: 0.7rem;
+    border-left-width: 3px;
+  }
+
+  #hero-section .hero-proof-grid > div > div:first-child {
+    font-size: 1.3rem;
+  }
+
+  #hero-section .hero-proof-grid > div > div:nth-child(2) {
+    font-size: 0.53rem;
+    letter-spacing: 0.08em;
+    line-height: 1.3;
+  }
+
+  #hero-section .hero-proof-grid > div > div:last-child {
+    font-size: 0.61rem;
+    line-height: 1.35;
+  }
+
+  #hero-section .hero-verification > div {
+    align-items: flex-start;
+  }
+
+  #hero-section .hero-main-card > .flex.flex-wrap {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.65rem;
+  }
+
+  #hero-section .hero-main-card > .flex.flex-wrap button {
+    width: 100%;
+    justify-content: center;
+  }
+
+  #hero-section .hero-main-card > p {
+    font-size: 0.78rem;
+    line-height: 1.55;
+    margin-bottom: 1rem;
+  }
+
+  #hero-section > div > .mt-6 {
+    margin-top: 0.85rem;
+    gap: 0.6rem;
+  }
+
+  #hero-section > div > .mt-6 > div {
+    padding: 0.8rem;
+    border-left-width: 3px;
+  }
+
+  #hero-section > div > .mt-6 > div > div:first-child {
+    font-size: 1.35rem;
+  }
+
+  #hero-section > div > .mt-6 > div > div:last-child {
+    font-size: 0.62rem;
+    letter-spacing: 0.05em;
+  }
+
+  #products-section .mb-12,
+  #company-section .mb-14 {
+    margin-bottom: 1.75rem;
+  }
+
+  #products-section .mb-12 > div:first-child p,
+  #company-section .mb-14 > p {
+    font-size: 0.76rem;
+    line-height: 1.55;
+  }
+
+  #products-section .mb-12 > div:first-child h2,
+  #company-section .mb-14 h2,
+  #news-section h2,
+  #headquarters-section h2,
+  #contact-section h2 {
+    font-size: 1.65rem !important;
+    line-height: 1.02 !important;
+  }
+
+  #products-section .mb-12 > div:last-child {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.25rem;
+  }
+
+  #products-section .mb-12 > div:last-child button {
+    min-height: 2.5rem;
+    padding: 0.45rem 0.3rem;
+    font-size: 0.56rem;
+    letter-spacing: 0.025em;
+  }
+
+  #products-section .grid.grid-cols-1.md\:grid-cols-2 {
+    gap: 1rem;
+  }
+
   #products-section .group > div:last-child {
-    padding: 1rem !important;
+    padding: 1.05rem !important;
+    gap: 0.8rem;
+  }
+
+  #products-section .group > div:first-child {
+    height: 8.5rem;
+    aspect-ratio: 16 / 9;
+  }
+
+  #products-section .group > div:first-child img,
+  #news-section article img {
+    object-position: center;
+    filter: saturate(0.88) contrast(1.04);
   }
 
   #products-section .group h3 {
-    font-size: 1.125rem;
+    font-size: 1rem;
     line-height: 1.15;
+    min-height: 2.6rem;
+  }
+
+  #products-section .group > div:last-child > div:first-child > p:first-of-type {
+    min-height: 2.2rem;
+    font-size: 0.64rem;
+    line-height: 1.35;
+    letter-spacing: 0.045em;
   }
 
   #products-section .group > div:last-child > div:nth-of-type(2),
@@ -104,8 +332,24 @@
 
   #products-section .group button,
   #products-section > div > div:last-child button {
-    min-height: 2.5rem;
-    padding: 0.6rem 0.5rem !important;
+    min-height: 2.4rem;
+    padding: 0.55rem 0.4rem !important;
+    font-size: 0.56rem;
+    letter-spacing: 0.06em;
+  }
+
+  #products-section .group > div:last-child > div:first-child p:last-child {
+    font-size: 0.7rem;
+  }
+
+  #products-section .mt-12 {
+    margin-top: 2rem;
+    padding: 1rem !important;
+    gap: 1rem;
+  }
+
+  #products-section .mt-12 button {
+    width: 100%;
   }
 
   #news-section article > div:last-child {
@@ -115,6 +359,25 @@
   #news-section article h3 {
     font-size: 1.125rem;
     line-height: 1.2;
+    letter-spacing: -0.015em;
+  }
+
+  #news-section article .p-5 {
+    padding: 1rem !important;
+  }
+
+  #news-section .flex.flex-wrap.items-center.gap-1\.5 {
+    width: 100%;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    padding-bottom: 0.25rem;
+  }
+
+  #news-section .flex.flex-wrap.items-center.gap-1\.5 button {
+    flex: 0 0 auto;
+    min-height: 2.25rem;
+    font-size: 0.58rem;
+    letter-spacing: 0.04em;
   }
 
   #company-section .p-8,
@@ -123,10 +386,220 @@
     padding: 1.25rem !important;
   }
 
+  #company-section .grid,
+  #headquarters-section .grid,
+  #contact-section .grid {
+    gap: 1rem;
+  }
+
+  #company-section .grid.grid-cols-1.sm\:grid-cols-2 {
+    gap: 0.65rem;
+  }
+
+  #company-section .grid.grid-cols-1.sm\:grid-cols-2 > div {
+    padding: 0.9rem;
+  }
+
+  #company-section .company-certifications {
+    grid-template-columns: 1fr;
+  }
+
+  #company-section .company-certifications > div {
+    min-height: 2.7rem;
+  }
+
+  #news-section article {
+    min-width: 0;
+  }
+
+  #news-section article img {
+    height: 8.5rem;
+  }
+
+  #headquarters-section iframe {
+    min-height: 11rem;
+  }
+
+  #headquarters-section .interactive-map-panel {
+    min-height: 15rem;
+  }
+
+  #headquarters-section .interactive-map-frame {
+    min-height: 10.5rem;
+  }
+
+  #headquarters-section .p-3,
+  #headquarters-section .p-4 {
+    padding: 0.8rem !important;
+  }
+
+  #headquarters-section .p-3 button,
+  #headquarters-section .p-3 a {
+    min-height: 2.5rem;
+    font-size: 0.58rem;
+    letter-spacing: 0.04em;
+  }
+
+  #headquarters-section .direct-contact-grid {
+    grid-template-columns: 1fr;
+    gap: 0.6rem;
+  }
+
+  #headquarters-section .direct-contact-grid > a {
+    min-width: 0;
+    padding: 0.7rem;
+  }
+
+  #headquarters-section .direct-contact-grid > a > span:last-child {
+    white-space: nowrap;
+  }
+
+  #headquarters-section .flex.items-center.justify-between {
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  #headquarters-section .flex.items-center.justify-between > div:first-child {
+    min-width: 0;
+  }
+
+  #headquarters-section .flex.items-center.justify-between > div:first-child span {
+    line-height: 1.35;
+  }
+
+  #contact-section .rfq-card,
+  #contact-section .p-6 {
+    padding: 1rem !important;
+  }
+
+  #contact-section .rfq-card {
+    border-left-width: 3px;
+  }
+
+  #contact-section .rfq-form {
+    gap: 1rem;
+  }
+
+  #contact-section .rfq-form > * + * {
+    margin-top: 1rem !important;
+  }
+
+  #contact-section .rfq-form label {
+    font-size: 0.58rem;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.4rem;
+  }
+
+  #contact-section .rfq-form .grid {
+    gap: 0.75rem;
+  }
+
+  #contact-section .rfq-form select,
+  #contact-section .rfq-form input,
+  #contact-section .rfq-form textarea {
+    width: 100%;
+    min-width: 0;
+    border-radius: 0;
+  }
+
+  #contact-section .rfq-form select {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding-right: 2rem;
+  }
+
+  #contact-section input,
+  #contact-section select,
+  #contact-section textarea {
+    min-height: 2.5rem;
+    font-size: 0.7rem;
+  }
+
+  #contact-section input::placeholder,
+  #contact-section textarea::placeholder {
+    color: #64748b;
+    opacity: 0.42;
+    font-size: 0.68rem;
+    line-height: 1.35;
+  }
+
+  #contact-section textarea::placeholder {
+    opacity: 0.35;
+  }
+
+  #contact-section .text-sm {
+    font-size: 0.82rem;
+  }
+
+  #contact-section .desk-channel {
+    align-items: flex-start;
+    padding: 0.7rem;
+  }
+
+  #contact-section .desk-channel > div:last-child {
+    min-width: 0;
+  }
+
+  #contact-section .desk-channel > div:last-child > span:last-child {
+    display: block;
+    font-size: 0.72rem;
+    line-height: 1.35;
+    overflow-wrap: anywhere;
+  }
+
+  #contact-section .desk-commitments {
+    padding: 1rem !important;
+  }
+
+  #contact-section .desk-commitments li {
+    align-items: flex-start;
+    line-height: 1.45;
+  }
+
+  #contact-section a span:last-child {
+    overflow-wrap: anywhere;
+  }
+
+  footer .grid {
+    gap: 2rem;
+  }
+
+  footer .footer-cta-actions {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.6rem;
+  }
+
+  footer .footer-cta-actions button,
+  footer .footer-cta-actions a {
+    width: 100%;
+    text-align: center;
+    padding: 0.65rem 0.75rem;
+  }
+
+  footer .footer-product-link {
+    align-items: flex-start;
+    line-height: 1.35;
+  }
+
+  footer .footer-product-link > span:first-child {
+    min-width: 0;
+  }
+
+  footer .footer-product-link > span:last-child {
+    flex-shrink: 0;
+  }
+
+  footer .text-xs {
+    line-height: 1.5;
+  }
+
   #contact-section button {
-    min-height: 2.75rem;
-    padding-top: 0.75rem;
-    padding-bottom: 0.75rem;
+    min-height: 2.5rem;
+    padding-top: 0.6rem;
+    padding-bottom: 0.6rem;
   }
 }
 
