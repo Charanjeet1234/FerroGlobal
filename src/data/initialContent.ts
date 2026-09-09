@@ -21,8 +21,8 @@ export const initialCompanyInfo: CompanyInfo = {
     phonePrimary: '+971 4 458 0205',
     phoneSecondary: '+971 52 442 6070',
     whatsapp: '+971524426070',
-    emailSales: 'ferro.global25@gmail.com',
-    emailInfo: 'ferro.global25@gmail.com',
+    emailSales: 'marketing@ferroglobal.ae',
+    emailInfo: 'marketing@ferroglobal.ae',
     workingHours: 'Monday - Saturday: 09:00 AM – 06:00 PM (GST)',
   },
   metrics: [
@@ -54,8 +54,8 @@ export const initialCompanyInfo: CompanyInfo = {
     },
   ],
   certifications: ['Certificate of analysis', 'Pre-shipment inspection', 'Origin documentation', 'Port delivery coordination'],
-  targetRegions: ['Middle East & GCC', 'Europe & Mediterranean', 'North & South Africa', 'India & South Asia', 'Turkey & Central Asia'],
-  keyPorts: ['Jebel Ali Port (UAE)', 'Port of Rotterdam (NL)', 'Mersin International Port (TR)', 'Port of Durban (ZA)', 'Nhava Sheva / Mundra (IN)', 'Hamad Port (QA)'],
+  targetRegions: ['United Arab Emirates', 'Middle East & GCC', 'Europe & Mediterranean', 'North & South Africa', 'India & South Asia', 'Turkey & Central Asia'],
+  keyPorts: ['Jebel Ali Port (UAE)', 'Port of Rotterdam (NL)', 'Mersin International Port (TR)', 'Port of Durban (ZA)', 'Nhava Sheva / Mundra (IN)', 'Kolkata Port (IN)', 'Hamad Port (QA)', 'Extended global port network'],
 };
 
 export const initialProducts: Product[] = [

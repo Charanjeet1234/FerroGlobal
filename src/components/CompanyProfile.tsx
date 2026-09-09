@@ -122,7 +122,7 @@ export const CompanyProfile: React.FC = () => {
                 FROM DUBAI TO INDUSTRIAL MARKETS
               </h3>
               <p className="text-xs text-gray-600 leading-relaxed font-normal">
-                Our Dubai office coordinates enquiries and shipments for buyers across the Middle East, Europe, Africa, India and Turkey, with delivery arranged to the required port or market.
+                Our Dubai office coordinates ferro alloy enquiries and shipments across the UAE. We also support buyers across the Middle East, Europe, Africa, India and Turkey, with delivery arranged to the required port, including Kolkata, or market through an extended global port network coordinated to each delivery requirement.
               </p>
             </div>
 
