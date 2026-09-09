@@ -95,5 +95,7 @@ export interface ContactInquiry {
   destinationPort: string;
   targetDate: string;
   message: string;
+  specificationFileName?: string;
+  specificationFileSize?: number;
   status: 'Received' | 'Quoted' | 'Processing';
 }

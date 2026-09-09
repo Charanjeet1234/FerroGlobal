@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { useCms } from '../context/CmsContext';
 import { ContactInquiry } from '../types';
 import {
@@ -10,7 +10,11 @@ import {
   Mail,
   ShieldCheck,
   RefreshCw,
+  FileText,
+  AlertCircle,
 } from 'lucide-react';
+
+const MAX_SPECIFICATION_FILE_SIZE = 10 * 1024 * 1024;
 
 export const AutomatedContactForm: React.FC = () => {
   const { products, addInquiry, rfqPreselectedProduct, companyInfo } = useCms();
@@ -32,6 +36,11 @@ export const AutomatedContactForm: React.FC = () => {
   const [submittedInquiry, setSubmittedInquiry] = useState<ContactInquiry | null>(null);
   const [copied, setCopied] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [specificationFile, setSpecificationFile] = useState<File | null>(null);
+  const [specificationFileError, setSpecificationFileError] = useState('');
+  const [formError, setFormError] = useState('');
+  const specificationFileInputRef = useRef<HTMLInputElement>(null);
+  const formErrorRef = useRef<HTMLDivElement>(null);
 
   // Update grade selections when product changes
   const currentSelectedProduct = products.find((p) => p.id === formData.productId) || products[0];
@@ -47,6 +56,10 @@ export const AutomatedContactForm: React.FC = () => {
     }
   }, [rfqPreselectedProduct]);
 
+  useEffect(() => {
+    if (formError) formErrorRef.current?.focus();
+  }, [formError]);
+
   const handleProductChange = (newProductId: string) => {
     const prod = products.find((p) => p.id === newProductId);
     setFormData((prev) => ({
@@ -56,8 +69,59 @@ export const AutomatedContactForm: React.FC = () => {
     }));
   };
 
+  const handleSpecificationFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    setSpecificationFileError('');
+
+    if (!file) {
+      setSpecificationFile(null);
+      return;
+    }
+
+    if (!file.name.toLowerCase().endsWith('.pdf') || (file.type && file.type !== 'application/pdf')) {
+      setSpecificationFile(null);
+      setSpecificationFileError('Please select a PDF file.');
+      e.target.value = '';
+      return;
+    }
+
+    if (file.size > MAX_SPECIFICATION_FILE_SIZE) {
+      setSpecificationFile(null);
+      setSpecificationFileError('The PDF must be smaller than 10 MB.');
+      e.target.value = '';
+      return;
+    }
+
+    setSpecificationFile(file);
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
+    const pendingField = [
+      { value: formData.companyName, label: 'Company / steelworks' },
+      { value: formData.contactPerson, label: 'Contact person' },
+      { value: formData.email, label: 'Business email' },
+      { value: formData.phone, label: 'Phone / WhatsApp' },
+      { value: formData.destinationPort, label: 'Destination port' },
+    ].find((field) => !field.value.trim());
+
+    if (pendingField) {
+      setFormError(`${pendingField.label} is required.`);
+      return;
+    }
+
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email.trim())) {
+      setFormError('Please enter a valid business email address so our trading desk can reply to your enquiry.');
+      return;
+    }
+
+    if (specificationFileError) {
+      setFormError('Please correct the specification PDF attachment before sending your enquiry.');
+      return;
+    }
+
+    setFormError('');
     setIsSubmitting(true);
 
     setTimeout(() => {
@@ -74,6 +138,8 @@ export const AutomatedContactForm: React.FC = () => {
         destinationPort: formData.destinationPort,
         targetDate: formData.targetDate,
         message: formData.message,
+        specificationFileName: specificationFile?.name,
+        specificationFileSize: specificationFile?.size,
       });
 
       setSubmittedInquiry(inquiry);
@@ -91,6 +157,7 @@ Product: ${submittedInquiry.productName} (${submittedInquiry.grade})
 Quantity: ${submittedInquiry.quantityMT} MT
 Incoterm: ${submittedInquiry.incoterm} - Port: ${submittedInquiry.destinationPort}
 Email: ${submittedInquiry.email} | Phone: ${submittedInquiry.phone}
+Specification PDF: ${submittedInquiry.specificationFileName || 'Not attached'}
 Status: Enquiry received by the Dubai trading desk
 Issued: ${new Date(submittedInquiry.timestamp).toLocaleString()}`;
 
@@ -109,6 +176,10 @@ Issued: ${new Date(submittedInquiry.timestamp).toLocaleString()}`;
       phone: '',
       message: '',
     }));
+    setSpecificationFile(null);
+    setSpecificationFileError('');
+    setFormError('');
+    if (specificationFileInputRef.current) specificationFileInputRef.current.value = '';
   };
 
   const whatsappMessageUrl = submittedInquiry
@@ -192,6 +263,14 @@ Issued: ${new Date(submittedInquiry.timestamp).toLocaleString()}`;
                       <span>{submittedInquiry.message}</span>
                     </div>
                   )}
+
+                  {submittedInquiry.specificationFileName && (
+                    <div className="pt-2 border-t border-gray-200 text-xs text-gray-600 flex items-center gap-2">
+                      <FileText className="w-4 h-4 text-[#D32F2F] shrink-0" />
+                      <span className="font-bold text-gray-800">Specification PDF:</span>
+                      <span>{submittedInquiry.specificationFileName}</span>
+                    </div>
+                  )}
                 </div>
 
                 {/* Instant Actions */}
@@ -225,7 +304,21 @@ Issued: ${new Date(submittedInquiry.timestamp).toLocaleString()}`;
               </div>
             ) : (
               /* The Interactive Automated Form */
-              <form onSubmit={handleSubmit} className="rfq-form space-y-6">
+              <form onSubmit={handleSubmit} noValidate className="rfq-form space-y-6">
+                {formError && (
+                  <div
+                    ref={formErrorRef}
+                    tabIndex={-1}
+                    role="alert"
+                    className="flex items-start gap-3 border border-red-200 border-l-4 border-l-[#D32F2F] bg-red-50 p-4 text-left outline-none"
+                  >
+                    <AlertCircle className="mt-0.5 h-5 w-5 shrink-0 text-[#D32F2F]" />
+                    <div>
+                      <p className="text-xs font-bold uppercase tracking-wider text-red-950">Enquiry needs your attention</p>
+                      <p className="mt-1 text-xs leading-relaxed text-red-800">{formError}</p>
+                    </div>
+                  </div>
+                )}
                 
                 {/* Product & Grade Selector */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -385,6 +478,35 @@ Issued: ${new Date(submittedInquiry.timestamp).toLocaleString()}`;
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     className="w-full bg-[#F8F9FA] border border-gray-300 p-3 text-xs sm:text-sm text-[#1A1A1A] focus:outline-none focus:border-[#D32F2F] focus:bg-white transition-colors"
                   />
+                </div>
+
+                {/* Product Specification PDF */}
+                <div className="border-t border-gray-200 pt-4">
+                  <label htmlFor="product-specification-pdf" className="block text-xs font-bold text-gray-800 uppercase tracking-wider mb-2">
+                    Product specification PDF (Optional)
+                  </label>
+                  <input
+                    ref={specificationFileInputRef}
+                    id="product-specification-pdf"
+                    type="file"
+                    accept=".pdf,application/pdf"
+                    onChange={handleSpecificationFileChange}
+                    className="w-full bg-[#F8F9FA] border border-gray-300 px-3.5 py-2.5 text-xs sm:text-sm text-[#1A1A1A] file:mr-3 file:border-0 file:bg-[#1A1A1A] file:px-3 file:py-1.5 file:text-xs file:font-bold file:text-white focus:outline-none focus:border-[#D32F2F] focus:bg-white transition-colors"
+                  />
+                  <p className="mt-1.5 text-[11px] text-gray-500">
+                    Attach a product chemistry or specification sheet in PDF format, up to 10 MB. The file name will be included with your enquiry.
+                  </p>
+                  {specificationFileError && (
+                    <div className="mt-2 flex items-start gap-2 border-l-2 border-[#D32F2F] bg-red-50 px-3 py-2 text-xs text-red-800" role="alert">
+                      <AlertCircle className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[#D32F2F]" />
+                      <span>{specificationFileError}</span>
+                    </div>
+                  )}
+                  {specificationFile && (
+                    <p className="mt-1 text-xs font-semibold text-emerald-700" role="status">
+                      Selected: {specificationFile.name} ({(specificationFile.size / 1024 / 1024).toFixed(2)} MB)
+                    </p>
+                  )}
                 </div>
 
                 {/* Submit CTA - Geometric Balance */}

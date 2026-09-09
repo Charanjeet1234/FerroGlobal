@@ -707,6 +707,18 @@ export const CmsAdminModal: React.FC = () => {
                       <div className="text-[11px] text-gray-600 pt-1 border-t border-gray-200">
                         Email: <span className="font-medium text-gray-900">{inq.email}</span> | Phone: <span className="font-medium text-gray-900">{inq.phone}</span>
                       </div>
+                      <div className="flex items-center gap-2 text-[11px] pt-1 border-t border-gray-200">
+                        <FileText className="w-3.5 h-3.5 text-[#D32F2F] shrink-0" />
+                        <span className="text-gray-500 uppercase tracking-wider font-bold">Specification PDF:</span>
+                        {inq.specificationFileName ? (
+                          <span className="font-medium text-gray-900">
+                            {inq.specificationFileName}
+                            {inq.specificationFileSize ? ` (${(inq.specificationFileSize / 1024 / 1024).toFixed(2)} MB)` : ''}
+                          </span>
+                        ) : (
+                          <span className="text-gray-500">Not attached</span>
+                        )}
+                      </div>
                       <div className="flex flex-wrap items-center gap-2 pt-2">
                         <a
                           href={`mailto:${inq.email}?subject=${encodeURIComponent(`Re: ${inq.productName} enquiry ${inq.id}`)}`}
