@@ -75,10 +75,10 @@ export const CmsProvider: React.FC<{ children: React.ReactNode }> = ({ children 
             },
             contact: {
               ...savedCompanyInfo.contact,
-              emailSales: savedCompanyInfo.contact.emailSales === 'sales@ferroglobal.ae'
+              emailSales: ['sales@ferroglobal.ae', 'ferro.global25@gmail.com'].includes(savedCompanyInfo.contact.emailSales)
                 ? initialCompanyInfo.contact.emailSales
                 : savedCompanyInfo.contact.emailSales,
-              emailInfo: savedCompanyInfo.contact.emailInfo === 'info@ferroglobal.ae'
+              emailInfo: ['info@ferroglobal.ae', 'ferro.global25@gmail.com'].includes(savedCompanyInfo.contact.emailInfo)
                 ? initialCompanyInfo.contact.emailInfo
                 : savedCompanyInfo.contact.emailInfo,
             },
