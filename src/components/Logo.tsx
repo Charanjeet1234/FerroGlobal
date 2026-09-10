@@ -19,7 +19,7 @@ export const Logo: React.FC<LogoProps> = ({
         <div className="relative flex items-center gap-2">
           <img
             src={customLogoUrl}
-            alt="Ferro Global Trading LLC"
+            alt="ferro global trading fz-llc"
             className="h-10 max-w-[180px] object-contain"
           />
           <button
@@ -34,7 +34,7 @@ export const Logo: React.FC<LogoProps> = ({
         <div className="flex items-center gap-2.5">
           <img
             src={variant === 'footer' ? '/assets/ferro-global-logo-footer.svg' : '/assets/ferro-global-logo.svg'}
-            alt="Ferro Global Trading LLC"
+            alt="ferro global trading fz-llc"
             className={`h-auto object-contain ${variant === 'hero' ? 'w-[280px] max-w-full' : variant === 'footer' ? 'w-[240px] max-w-full' : 'w-[220px] max-w-full max-sm:w-[160px]'}`}
           />
         </div>

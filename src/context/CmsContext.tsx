@@ -235,7 +235,7 @@ export const CmsProvider: React.FC<{ children: React.ReactNode }> = ({ children 
 
   const exportCmsData = () => {
     const exportObject = {
-      project: 'Ferro Global Trading LLC',
+      project: 'ferro global trading fz-llc',
       exportTimestamp: new Date().toISOString(),
       companyInfo,
       products,

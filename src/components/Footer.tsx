@@ -70,7 +70,7 @@ export const Footer: React.FC = () => {
           <div className="lg:col-span-4 space-y-4">
             <Logo variant="footer" />
             <p className="text-xs text-gray-400 leading-relaxed max-w-sm mt-3 font-normal">
-              <strong>Ferro Global Trading LLC</strong> is a Dubai-based trading company supplying ferro alloys and manganese ore to steelmakers, foundries and industrial buyers.
+              <strong>Ferro Global Trading FZ-LLC</strong> is a Dubai-based trading company supplying ferro alloys and manganese ore to steelmakers, foundries and industrial buyers.
             </p>
             <div className="space-y-2 pt-2 text-xs">
               <div className="flex items-start gap-2.5">
@@ -174,7 +174,7 @@ export const Footer: React.FC = () => {
         {/* Bottom Legal & Copyright Bar - Matching Geometric Balance layout */}
         <div className="mt-12 pt-8 border-t border-gray-800 flex flex-col sm:flex-row items-center justify-between gap-4 text-gray-500 text-[10px] uppercase tracking-widest">
           <div>
-            © {new Date().getFullYear()} <strong>FERRO GLOBAL TRADING LLC</strong>. ALL RIGHTS RESERVED.
+            © {new Date().getFullYear()} <strong>ferro global trading fz-llc</strong>. ALL RIGHTS RESERVED.
           </div>
 
           <div className="flex items-center gap-4">

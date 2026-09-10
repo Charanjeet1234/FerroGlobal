@@ -178,7 +178,7 @@ export const InteractiveMap: React.FC = () => {
             {/* Embedded Responsive Interactive Map */}
             <div className="interactive-map-frame relative flex-1 w-full min-h-[360px]">
               <iframe
-                title="Ferro Global Trading LLC Headquarters Map"
+                title="ferro global trading fz-llc Headquarters Map"
                 src="https://maps.google.com/maps?q=Preatoni%20Tower%20Cluster%20L%20JLT%20Dubai&t=&z=15&ie=UTF8&iwloc=&output=embed"
                 width="100%"
                 height="100%"
@@ -190,7 +190,7 @@ export const InteractiveMap: React.FC = () => {
               {/* Overlay Marker Banner - Geometric Balance footer label */}
               <div className="absolute bottom-0 left-0 right-0 bg-white p-4 border-t border-gray-200 text-left shadow-md">
                 <p className="text-xs font-bold uppercase tracking-wider leading-tight text-[#1A1A1A]">
-                  FERRO GLOBAL TRADING LLC <br />
+                  ferro global trading fz-llc <br />
                   <span className="font-normal text-gray-600 normal-case">
                     Preatoni Tower, Cluster L, Jumeirah Lakes Towers, Dubai, UAE
                   </span>

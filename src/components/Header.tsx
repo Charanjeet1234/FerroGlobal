@@ -104,7 +104,7 @@ export const Header: React.FC = () => {
               scrollToSection('hero-section');
             }}
             className="focus:outline-none"
-            aria-label="Ferro Global Trading LLC Home"
+            aria-label="Ferro Global Trading FZ-LLC Home"
           >
             <Logo />
           </a>

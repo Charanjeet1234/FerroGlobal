@@ -1,6 +1,6 @@
 {
-  "name": "Ferro Global Trading LLC",
-  "description": "Official website of Ferro Global Trading LLC (ferroglobal.ae) - premier Dubai-based global supplier of ferro alloys, metals, and minerals for the steel industry.",
+  "name": "ferro global trading fz-llc",
+  "description": "Official website of ferro global trading fz-llc (ferroglobal.ae) - premier Dubai-based global supplier of ferro alloys, metals, and minerals for the steel industry.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

@@ -1,8 +1,8 @@
 import { Product, BlogPost, CompanyInfo } from '../types';
 
 export const initialCompanyInfo: CompanyInfo = {
-  name: 'Ferro Global Trading LLC',
-  tradingName: 'Ferro Global Trading LLC',
+  name: 'ferro global trading fz-llc',
+  tradingName: 'ferro global trading fz-llc',
   tagline: 'Ferro alloy supply for steelmakers, foundries and industrial buyers',
   establishedYear: 2012,
   headquarters: {
@@ -54,7 +54,7 @@ export const initialCompanyInfo: CompanyInfo = {
     },
   ],
   certifications: ['Certificate of analysis', 'Pre-shipment inspection', 'Origin documentation', 'Port delivery coordination'],
-  targetRegions: ['United Arab Emirates', 'Middle East & GCC', 'Europe & Mediterranean', 'North & South Africa', 'India & South Asia', 'Turkey & Central Asia'],
+  targetRegions: ['Middle East & GCC', 'Europe & Mediterranean', 'North & South Africa', 'India & South Asia', 'Turkey & Central Asia'],
   keyPorts: ['Jebel Ali Port (UAE)', 'Port of Rotterdam (NL)', 'Mersin International Port (TR)', 'Port of Durban (ZA)', 'Nhava Sheva / Mundra (IN)', 'Kolkata Port (IN)', 'Hamad Port (QA)', 'Extended global port network'],
 };
 

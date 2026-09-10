@@ -36,7 +36,7 @@ export const ProductDetailModal: React.FC = () => {
 
   const handleDownloadSpec = () => {
     // Generate an instant clean text/spec manifest file for metallurgical buyers
-    const specContent = `FERRO GLOBAL TRADING LLC - TECHNICAL DATA SHEET
+    const specContent = `ferro global trading fz-llc - TECHNICAL DATA SHEET
 Commodity: ${product.name} (${product.chemicalFormula})
 Headquarters: Dubai, UAE
 Export Inquiries: marketing@ferroglobal.ae | +971 4 458 0205
@@ -62,7 +62,7 @@ ${product.specs.applications.map((a) => `- ${a}`).join('\n')}
 
 =========================================
 Disclaimer: Technical parameters conform to standard international assay standards. Custom chemistries available upon request.
-Issued by: Ferro Global Trading LLC, Office 2005, Preatoni Tower, Cluster L, JLT, Dubai, UAE.`;
+Issued by: ferro global trading fz-llc, Office 2005, Preatoni Tower, Cluster L, JLT, Dubai, UAE.`;
 
     const blob = new Blob([specContent], { type: 'text/plain' });
     const url = URL.createObjectURL(blob);

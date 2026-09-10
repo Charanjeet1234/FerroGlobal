@@ -149,7 +149,7 @@ export const AutomatedContactForm: React.FC = () => {
 
   const copyRfqSummary = () => {
     if (!submittedInquiry) return;
-    const summary = `FERRO GLOBAL TRADING LLC - OFFICIAL RFQ CONFIRMATION
+    const summary = `ferro global trading fz-llc - OFFICIAL RFQ CONFIRMATION
 Reference ID: ${submittedInquiry.id}
 Company: ${submittedInquiry.companyName}
 Contact Person: ${submittedInquiry.contactPerson}
