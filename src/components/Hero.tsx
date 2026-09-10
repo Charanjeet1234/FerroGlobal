@@ -52,9 +52,9 @@ export const Hero: React.FC = () => {
             </div>
 
             {/* Bold Display Headline matching Geometric Balance */}
-            <h1 className="text-4xl sm:text-5xl lg:text-[4.5rem] font-black leading-[0.92] tracking-tighter mb-4 text-[#1A1A1A]">
+            <h1 className="text-4xl sm:text-5xl lg:text-[4.5rem] font-black leading-[0.92] tracking-tighter mb-4 text-[#D32F2F]">
               FERRO GLOBAL <br />
-              <span className="text-[#D32F2F]">TRADING LLC</span>
+              <span className="text-[#1A1A1A]">TRADING FZ-LLC</span>
             </h1>
 
             {/* Descriptive Lead */}
