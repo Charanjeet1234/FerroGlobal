@@ -38,6 +38,8 @@ export interface BlogPost {
   readTime: string;
   imageUrl: string;
   tags: string[];
+  /** Shown to readers in the highlighted notice strip above the news grid. */
+  important?: boolean;
 }
 
 export interface CompanyInfo {

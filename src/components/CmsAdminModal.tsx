@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useCms } from '../context/CmsContext';
 import { Product, BlogPost } from '../types';
+import { fromDateInputValue, sortPostsByDate, toDateInputValue } from '../utils/postDates';
 import {
   Database,
   X,
@@ -181,7 +182,8 @@ export const CmsAdminModal: React.FC = () => {
       content: 'Detailed market intelligence report covering global smelter output and regional steel demand...',
       category: 'Market Trends',
       author: 'Commercial Trading Desk',
-      publishedDate: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
+      publishedDate: new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }),
+      important: false,
       readTime: '4 min read',
       imageUrl: 'https://images.unsplash.com/photo-1504917599217-d4dc5ebe6122?auto=format&fit=crop&w=800&q=80',
       tags: ['Ferro Alloys', 'Market Report'],
@@ -558,7 +560,7 @@ export const CmsAdminModal: React.FC = () => {
                     <Plus className="w-3 h-3" /> New Post
                   </button>
                 </div>
-                {blogPosts.map((post) => (
+                {sortPostsByDate(blogPosts).map((post) => (
                   <button
                     key={post.id}
                     onClick={() => setSelectedPostId(post.id)}
@@ -615,6 +617,33 @@ export const CmsAdminModal: React.FC = () => {
                         className="w-full bg-[#F8F9FA] border border-gray-300 p-2 text-[#1A1A1A] focus:border-[#D32F2F] focus:bg-white"
                       />
                     </div>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-3 items-end">
+                    <div>
+                      <label htmlFor="cms-post-date" className="block text-gray-700 uppercase font-bold tracking-wider mb-1">Publish Date</label>
+                      <input
+                        id="cms-post-date"
+                        type="date"
+                        value={toDateInputValue(currentEditingPost.publishedDate)}
+                        onChange={(e) =>
+                          e.target.value &&
+                          updateBlogPost({ ...currentEditingPost, publishedDate: fromDateInputValue(e.target.value) })
+                        }
+                        className="w-full bg-[#F8F9FA] border border-gray-300 p-2 text-[#1A1A1A] focus:border-[#D32F2F] focus:bg-white"
+                      />
+                    </div>
+                    <label className="flex items-center gap-2 p-2 border border-gray-300 bg-[#F8F9FA] cursor-pointer">
+                      <input
+                        type="checkbox"
+                        checked={Boolean(currentEditingPost.important)}
+                        onChange={(e) =>
+                          updateBlogPost({ ...currentEditingPost, important: e.target.checked })
+                        }
+                        className="accent-[#D32F2F]"
+                      />
+                      <span className="text-gray-700 uppercase font-bold tracking-wider">Show as important notice</span>
+                    </label>
                   </div>
 
                   <div>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useCms } from '../context/CmsContext';
+import { sortPostsByDate } from '../utils/postDates';
 import { Product, BlogPost } from '../types';
 import {
   Search,
@@ -63,7 +64,7 @@ export const SearchBarModal: React.FC = () => {
         const matchesTags = b.tags.some((t) => t.toLowerCase().includes(normalizedQuery));
         return matchesTitle || matchesSummary || matchesTags;
       })
-    : blogPosts.slice(0, 2);
+    : sortPostsByDate(blogPosts).slice(0, 2);
 
   const handleSelectProduct = (product: Product) => {
     setIsSearchOpen(false);

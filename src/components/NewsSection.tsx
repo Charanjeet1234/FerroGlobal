@@ -1,7 +1,11 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { useCms } from '../context/CmsContext';
-import { BlogPost } from '../types';
+import { isRecentPost, sortPostsByDate } from '../utils/postDates';
+import { formatRelativeDate, useMarketNews } from '../hooks/useMarketNews';
 import {
+  AlertTriangle,
+  ExternalLink,
+  Radio,
   Calendar,
   Clock,
   ArrowRight,
@@ -10,10 +14,16 @@ import {
 export const NewsSection: React.FC = () => {
   const { blogPosts, setSelectedArticleForModal } = useCms();
   const [selectedTag, setSelectedTag] = useState<string>('All');
+  const { headlines, status: headlinesStatus } = useMarketNews();
+  const showHeadlines =
+    headlinesStatus !== 'error' && (selectedTag === 'All' || selectedTag === 'Market Trends');
 
   const categories = ['All', 'Market Trends', 'Ferro Alloys', 'Steel Industry', 'Company Updates'];
 
-  const filteredPosts = blogPosts.filter((post) => {
+  const sortedPosts = useMemo(() => sortPostsByDate(blogPosts), [blogPosts]);
+  const importantPosts = sortedPosts.filter((post) => post.important);
+
+  const filteredPosts = sortedPosts.filter((post) => {
     if (selectedTag === 'All') return true;
     return post.category === selectedTag;
   });
@@ -56,6 +66,88 @@ export const NewsSection: React.FC = () => {
           </div>
         </div>
 
+        {/* Important notices for readers */}
+        {importantPosts.length > 0 && (
+          <div
+            role="region"
+            aria-label="Important notices"
+            className="mb-8 bg-white border border-gray-200 border-l-4 border-l-[#D32F2F] shadow-xs divide-y divide-gray-100"
+          >
+            {importantPosts.map((post) => (
+              <button
+                key={post.id}
+                type="button"
+                onClick={() => setSelectedArticleForModal(post)}
+                className="group w-full flex items-start gap-3 p-4 text-left hover:bg-red-50/50 focus:outline-none focus-visible:bg-red-50 transition-colors"
+              >
+                <AlertTriangle className="w-4 h-4 text-[#D32F2F] mt-0.5 shrink-0" aria-hidden="true" />
+                <span className="min-w-0 flex-1">
+                  <span className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[10px] font-bold uppercase tracking-widest">
+                    <span className="text-[#D32F2F]">Important</span>
+                    <span className="text-gray-400">{post.publishedDate}</span>
+                  </span>
+                  <span className="block font-heading text-sm sm:text-base font-bold text-[#1A1A1A] group-hover:text-[#D32F2F] transition-colors mt-0.5">
+                    {post.title}
+                  </span>
+                  <span className="block text-xs text-gray-600 mt-0.5 line-clamp-2">{post.summary}</span>
+                </span>
+                <ArrowRight className="w-4 h-4 text-[#D32F2F] mt-1 shrink-0 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
+              </button>
+            ))}
+          </div>
+        )}
+
+        {/* Live industry headlines from /api/market-news */}
+        {showHeadlines && (
+          <div className="mb-8 bg-white border border-gray-200 shadow-xs" aria-live="polite">
+            <div className="flex items-center justify-between gap-3 px-4 py-3 border-b border-gray-100">
+              <h3 className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-[#1A1A1A]">
+                <Radio className="w-3.5 h-3.5 text-[#D32F2F]" aria-hidden="true" />
+                Latest industry headlines
+              </h3>
+              <span className="text-[10px] text-gray-400 uppercase tracking-wider">Updated hourly · external sources</span>
+            </div>
+            {headlinesStatus === 'loading' ? (
+              <div className="p-4 space-y-3" aria-label="Loading headlines">
+                {[0, 1, 2].map((i) => (
+                  <div key={i} className="h-4 bg-gray-100 animate-pulse" style={{ width: `${85 - i * 15}%` }} />
+                ))}
+              </div>
+            ) : (
+              <ul className="grid grid-cols-1 md:grid-cols-2 md:divide-x divide-gray-100">
+                {headlines.slice(0, 6).map((item) => (
+                  <li key={item.id} className="border-b border-gray-100 last:border-b-0 md:[&:nth-last-child(2):nth-child(odd)]:border-b-0">
+                    <a
+                      href={item.url}
+                      target="_blank"
+                      rel="noopener noreferrer nofollow"
+                      className="group flex items-start gap-3 px-4 py-3 hover:bg-gray-50 focus:outline-none focus-visible:bg-red-50 transition-colors"
+                    >
+                      <span className="min-w-0 flex-1">
+                        <span className="block text-sm font-bold text-[#1A1A1A] group-hover:text-[#D32F2F] leading-snug line-clamp-2">
+                          {item.title}
+                        </span>
+                        <span className="block mt-1 text-[11px] text-gray-500">
+                          {item.source}
+                          {item.publishedAt && <> · {formatRelativeDate(item.publishedAt)}</>}
+                        </span>
+                      </span>
+                      <ExternalLink className="w-3.5 h-3.5 text-gray-400 group-hover:text-[#D32F2F] mt-0.5 shrink-0" aria-hidden="true" />
+                      <span className="sr-only">(opens in a new tab)</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        )}
+
+        {filteredPosts.length === 0 && (
+          <p className="text-sm text-gray-500 py-12 text-center border border-dashed border-gray-300 bg-white">
+            No {selectedTag.toLowerCase()} updates yet.
+          </p>
+        )}
+
         {/* Dynamic News Grid - Geometric Balance clean white cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {filteredPosts.map((post, index) => (
@@ -88,8 +180,15 @@ export const NewsSection: React.FC = () => {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                   
-                  <div className="absolute top-3 left-3 bg-[#D32F2F] text-white px-2 py-0.5 text-[10px] font-bold uppercase tracking-widest shadow">
-                    {post.category}
+                  <div className="absolute top-3 left-3 flex flex-wrap gap-1.5">
+                    <span className="bg-[#D32F2F] text-white px-2 py-0.5 text-[10px] font-bold uppercase tracking-widest shadow">
+                      {post.category}
+                    </span>
+                    {isRecentPost(post) && (
+                      <span className="bg-white text-[#1A1A1A] px-2 py-0.5 text-[10px] font-bold uppercase tracking-widest shadow">
+                        New
+                      </span>
+                    )}
                   </div>
                 </div>
 
